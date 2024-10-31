@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-  background-color: lightgrey;
+  background-image: url('/1.webp');  // Pfad zum Bild im Projekt
+  background-size: auto;           // Bild bleibt in Originalgröße
+  background-repeat: repeat;       // Wiederholt sich horizontal und vertikal
+  background-position: center top; // Startet in der Mitte oben
+  background-attachment: fixed;    // Fixiert das Bild beim Scrollen
+  margin: 0
 }

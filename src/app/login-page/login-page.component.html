@@ -1,21 +1,12 @@
+<app-header></app-header>
 <div class="login-container">
   <div class="description">
     <p>
       Tägliche Fortschritte, klare Ziele, erfolgreiche Projekte – willkommen in deinem digitalen Arbeitsjournal
     </p>
   </div>
-
   <div class="login-box">
-<!--    <h2>Login</h2>-->
-    <form>
-<!--      <label for="username">Benutzername</label>-->
-      <input type="text" id="username" name="username" placeholder="Benutzername">
-
-<!--      <label for="password">Passwort</label>-->
-      <input type="password" id="password" name="password" placeholder="Passwort">
-
-      <button class="login" type="submit">Login</button>
-      <button class="register" type="button">Neues Konto erstellen</button>
-    </form>
+    <app-login *ngIf="isLoginMode" (switchToRegister)="toggleMode()"></app-login>
+    <app-register *ngIf="!isLoginMode" (switchToLogin)="toggleMode()"></app-register>
   </div>
 </div>

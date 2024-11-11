@@ -21,7 +21,7 @@ export class RegisterComponent {
 
   onRegister(event: Event): void {
     event.preventDefault();
-    // Registrierungslogik hier hinzufügen
+    // HIer werde ich noch die Registrierlogik einfügen
     this.router.navigate(['/login']); // Zurück zur Login-Seite nach erfolgreicher Registrierung
   }
 

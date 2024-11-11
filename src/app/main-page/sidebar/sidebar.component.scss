@@ -9,6 +9,10 @@
   position: fixed;
 }
 
+.sidebar ul:first-child {
+  cursor: pointer;
+}
+
 .sidebar ul {
   list-style: none;
   padding: 0;

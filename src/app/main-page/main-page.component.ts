@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HeaderComponent} from '../header/header.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {ContentContainerComponent} from './content-container/content-container.component';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -9,7 +9,7 @@ import {ContentContainerComponent} from './content-container/content-container.c
   imports: [
     HeaderComponent,
     SidebarComponent,
-    ContentContainerComponent
+    RouterModule
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'

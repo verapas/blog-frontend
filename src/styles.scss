@@ -6,5 +6,10 @@ body {
   background-repeat: repeat;       // Wiederholt sich horizontal und vertikal
   background-position: center top; // Startet in der Mitte oben
   background-attachment: fixed;    // Fixiert das Bild beim Scrollen
-  margin: 0
+  margin: 0;
+  height: 100%;
+}
+
+html {
+  height: 100%;
 }

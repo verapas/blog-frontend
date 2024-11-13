@@ -10,6 +10,7 @@ import {ContentComponent} from './content/content.component';
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: LoginPageComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: '',
     component: ContentComponent,
@@ -18,8 +19,8 @@ export const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'templates', component: TemplatesComponent },
       { path: 'posts', component: PostsComponent },
-      { path: '', redirectTo: 'main', pathMatch: 'full' }
     ]
   },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: '/login' }
 ];
+

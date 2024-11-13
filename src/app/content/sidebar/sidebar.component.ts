@@ -10,5 +10,9 @@ import {RouterModule} from '@angular/router';
 
 })
 export class SidebarComponent {
+  isMenuOpen = false;
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 }

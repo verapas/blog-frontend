@@ -1,14 +1,55 @@
-//.hamburger-menu {
-//  display: none;
-//  background: none;
-//  border: none;
-//  font-size: 30px;
-//  cursor: pointer;
-//  position: fixed;
-//  top: 10px;
-//  left: 10px;
-//  z-index: 1000;
-//}
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+  background-color: white;
+}
+
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 46px;
+  cursor: pointer;
+}
+
+.logo {
+  font-family: "Courier New";
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+}
+
+
+@media (max-width: 800px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .sidebar-header {
+    justify-content: space-between;
+    background-color: transparent;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-top: 3px;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 60px; // Anpassen an die Höhe des Headers
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    z-index: 999;
+  }
+
+  .sidebar.open {
+    display: block;
+  }
+}
 
 
 

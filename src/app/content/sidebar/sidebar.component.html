@@ -1,7 +1,12 @@
-<button class="hamburger-menu">☰</button>
+
+<div class="sidebar-header">
+  <button class="hamburger-menu" (click)="toggleMenu()">☰</button>
+  <h1 class="logo">Journal!X</h1>
+</div>
+
 <nav class="sidebar">
   <ul>
-    <li routerLink="/main"><a><h1>Journal!X</h1></a></li>
+    <li><a routerLink="/main">Hauptseite</a></li>
     <li><a routerLink="/profile">Profil</a></li>
     <li><a routerLink="/templates">Templates</a></li>
     <li><a routerLink="/posts">Einträge</a></li>

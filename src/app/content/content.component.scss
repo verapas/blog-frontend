@@ -23,7 +23,6 @@
   height: calc(97.5% - 20px);
   width: 100%;
   box-sizing: border-box;
-
 }
 
 @media (max-width: 1500px) {
@@ -38,6 +37,29 @@
     min-width: unset;
   }
 }
+
+@media (max-width: 800px) {
+  app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1000;
+  }
+
+  .elements-wrapper {
+    flex-direction: column;
+  }
+
+  .content-wrapper {
+    margin: 100px 15px 15px;
+    min-width: unset;
+    width: 100%;
+  }
+
+}
+
 
 app-sidebar {
   flex: 0 0 200px;

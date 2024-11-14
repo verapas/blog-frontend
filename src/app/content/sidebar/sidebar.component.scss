@@ -22,7 +22,6 @@
   flex-grow: 1;
 }
 
-
 @media (max-width: 800px) {
   .hamburger-menu {
     display: block;
@@ -33,25 +32,24 @@
     background-color: transparent;
     padding-left: 20px;
     padding-bottom: 10px;
-    padding-top: 3px;
+    padding-top: 0px;
   }
 
   .sidebar {
     display: none;
     position: fixed;
-    top: 60px; // Anpassen an die Höhe des Headers
+    top: 60px;
     left: 0;
-    width: 100%;
-    height: calc(100vh - 60px);
+    height: auto;
+    max-height: calc(100vh - 60px);
     z-index: 999;
   }
 
   .sidebar.open {
-    display: block;
+    display: block;  //transform: translateY(0);
+    width: 800px;
   }
 }
-
-
 
 .sidebar {
   font-family: "Arial Nova";

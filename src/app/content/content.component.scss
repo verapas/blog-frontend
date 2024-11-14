@@ -43,19 +43,19 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     height: auto;
     z-index: 1000;
   }
 
   .elements-wrapper {
     flex-direction: column;
+    padding-top: 60px; // Höhe des Headers
   }
 
   .content-wrapper {
-    margin: 100px 15px 15px;
-    min-width: unset;
-    width: 100%;
+    margin-top: 20px;
+    width: calc(100% - 30px);
+    min-height: calc(100vh - 80px);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +12,15 @@ import {RouterModule} from '@angular/router';
 export class SidebarComponent {
   isMenuOpen = false;
 
+  constructor(private router: Router) {
+  }
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+    this.isMenuOpen = false;
   }
 }

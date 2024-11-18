@@ -6,11 +6,11 @@
 
 <nav class="sidebar" [class.open]="isMenuOpen" >
   <ul>
-    <li><a routerLink="/main">Hauptseite</a></li>
-    <li><a routerLink="/profile">Profil</a></li>
-    <li><a routerLink="/templates">Templates</a></li>
-    <li><a routerLink="/posts">Einträge</a></li>
-    <li><a routerLink="/logout">Abmelden</a></li>
+    <li><a (click)="navigateTo('/main')">Hauptseite</a></li>
+    <li><a (click)="navigateTo('/profile')">Profil</a></li>
+    <li><a (click)="navigateTo('/templates')">Templates</a></li>
+    <li><a (click)="navigateTo('/posts')">Einträge</a></li>
+    <li><a (click)="navigateTo('/logout')">Abmelden</a></li>
   </ul>
 </nav>
 

@@ -23,6 +23,7 @@
   height: calc(97.5% - 20px);
   width: 100%;
   box-sizing: border-box;
+  //border: 2px solid darkgray;
 }
 
 @media (max-width: 1500px) {
@@ -31,12 +32,12 @@
   }
 }
 
-@media (max-width: 900px) {
-  .content-wrapper {
-    margin: 0 20px;
-    min-width: unset;
-  }
-}
+//@media (max-width: 900px) {
+//  .content-wrapper {
+//    margin: 0 20px;
+//    min-width: unset;
+//  }
+//}
 
 @media (max-width: 800px) {
   app-sidebar {
@@ -53,11 +54,13 @@
   }
 
   .content-wrapper {
-    margin-top: 20px;
+    //margin-top: 20px;
     width: calc(100% - 30px);
-    min-height: calc(100vh - 80px);
+    height: calc(100% - 30px);
+    //margin-bottom: 15px;
+    margin: 15px;
+    min-width: unset;
   }
-
 }
 
 

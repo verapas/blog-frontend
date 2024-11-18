@@ -13,9 +13,15 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
 }
 
 .editor {
   flex: 1;
   height: 100%;
 }
+
+//.froala-editor {
+//  height: 100%; /* Editor-Inhalt an den Container anpassen */
+//}
+

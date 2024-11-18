@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+//@import 'node_modules/froala-editor/css/froala_editor.pkgd.css';
+//@import 'node_modules/froala-editor/css/froala_style.css';
+
+@import 'froala-editor/css/froala_editor.pkgd.css';
+@import 'froala-editor/css/froala_style.css';
 
 body {
   background-image: url('/3.webp');

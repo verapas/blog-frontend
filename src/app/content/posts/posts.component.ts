@@ -48,7 +48,7 @@ export class PostsComponent {
         });
       }
     },
-    height: '92%',
+    height: 'calc(100% - 90px)',
     tableEditButtons: ['tableRows', 'tableColumns', 'tableCells', 'tableDelete'],
     quickInsertTags: ['table'],
   };

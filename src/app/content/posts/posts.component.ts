@@ -5,7 +5,7 @@ import 'froala-editor/js/plugins/table.min.js'; // Tabellen-Plugin importieren
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [FroalaEditorModule], // Importiere das Froala-Editor-Modul
+  imports: [FroalaEditorModule],
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
@@ -19,33 +19,32 @@ export class PostsComponent {
     events: {
       'initialized': function(this: any) {
         const editor = this as any;
-        editor.events.on('focus', function() {
-          if (editor.html.get() === '') {
-            const today = new Date().toLocaleDateString();
-            const template = `
-              <h2>Arbeitsjournal vom ${today}</h2>
-              <table style="width: 100%;">
-                <thead>
-                  <tr>
-                    <th>Tätigkeit</th>
-                    <th>Dauer</th>
-                    <th>Fortschritt/Anmerkungen</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h3>Reflexion</h3>
-              <p>Schreibe deine Reflexion hier...</p>
-            `;
-            editor.html.set(template);
-          }
-        });
+
+        if (editor.html.get() === '') {
+          const today = new Date().toLocaleDateString();
+          const template = `
+            <h2>Arbeitsjournal vom ${today}</h2>
+            <table style="width: 100%;">
+              <thead>
+                <tr>
+                  <th>Tätigkeit</th>
+                  <th>Dauer</th>
+                  <th>Fortschritt/Anmerkungen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <h3>Reflexion</h3>
+            <p>Schreibe deine Reflexion hier...</p>
+          `;
+          editor.html.set(template);
+        }
       }
     },
     height: 'calc(100% - 90px)',

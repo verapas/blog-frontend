@@ -37,21 +37,26 @@
 @media (max-width: 800px) {
   .hamburger-menu {
     display: block;
+    padding-top: 4px;
   }
 
   .sidebar-header {
-    justify-content: space-between;
+
+    //justify-content: center;
     background-color: transparent;
     padding-left: 20px;
     padding-bottom: 10px;
-    padding-top: 0px;
-    //width: 400px;
+    padding-top:0px;
+    //width: 100%;
 
   }
 
-  //.sidebar-header h1 {
-  //  width: max-content;
-  //}
+  .logo-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 12px;
+  }
 
   .sidebar {
     display: none;
@@ -59,13 +64,12 @@
     top: 60px;
     height: auto;
     max-height: calc(100vh - 60px);
-
     //z-index: 999;
   }
 
   .sidebar.open {
     display: block;  //transform: translateY(0);
-    width: calc(100% - 44px);
+    width: calc(100% - 43px);
     margin: 20px;
     border-radius: 10px;
     height: auto;

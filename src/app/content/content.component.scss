@@ -13,12 +13,12 @@
   flex: 1;
   display: flex;
   justify-content: left;
-  padding: 40px;
+  padding: 25px;
   padding-top: 20px;
   border-radius: 10px;
   max-width: 1000px;
   min-width: 600px;
-  margin: 20px auto;
+  //margin: 20px auto;
   background-color: #fff;
   height: calc(97.5% - 20px);
   width: 100%;
@@ -28,16 +28,10 @@
 
 @media (max-width: 1500px) {
   .content-wrapper {
-    margin: 0 5%;
+    margin: 28px
   }
 }
 
-//@media (max-width: 900px) {
-//  .content-wrapper {
-//    margin: 0 20px;
-//    min-width: unset;
-//  }
-//}
 
 @media (max-width: 800px) {
   app-sidebar {

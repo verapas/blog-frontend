@@ -1,1 +1,9 @@
-<h1>Main Page loaded...</h1>
+<div class="top-container">
+  <h2>Neuen Eintrag erstellen</h2>
+  <button class="save-button" (click)="savePost()">Veröffentlichen</button>
+</div>
+
+<div class="editor-container">
+  <div class="editor" [froalaEditor]="froalaOptions"></div>
+</div>
+

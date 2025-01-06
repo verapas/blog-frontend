@@ -83,5 +83,13 @@ button:hover {
   background-color: royalblue;
 }
 
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: -20px; /* Fehlermeldung rückt näher ans Eingabefeld */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 
 

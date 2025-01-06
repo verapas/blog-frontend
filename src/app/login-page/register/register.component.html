@@ -1,11 +1,60 @@
+<form (submit)="onRegister($event)">
+  <input
+    type="text"
+    id="username"
+    name="username"
+    placeholder="Benutzername"
+  />
 
-  <form (submit)="onRegister($event)">
-    <input type="text" id="username" name="username" placeholder="Benutzername">
-    <input type="email" id="email" name="email" placeholder="Email">
-    <input type="password" id="password" name="password" placeholder="Passwort">
-    <input type="password" id="confirm-password" name="confirm-password" placeholder="Passwort bestätigen">
+  <!-- Erste E-Mail-Eingabe -->
+  <input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="Email-Adresse"
+    [(ngModel)]="email"
+    #emailInput="ngModel"
+    required
+  />
+  @if (emailInput.touched && !isValidEmail(email) ) {
+    <div class="error">Bitte eine gültige E-Mail eingeben.</div>
+  }
 
-    <button class="login" type="submit">Registrieren</button>
-    <button class="register" type="button" (click)="navigateToLogin()">Zurück zum Login</button>
-  </form>
+  <!-- Bestätigungs-E-Mail-Eingabe -->
+  <input
+    type="email"
+    id="email-verification"
+    name="email-verification"
+    placeholder="Email-Adresse erneut eingeben"
+    [(ngModel)]="confirmEmail"
+    required
+  />
+  @if (email && confirmEmail && email !== confirmEmail) {
+    <div class="error">Die E-Mails stimmen nicht überein.</div>
+  }
 
+  <!-- Passwort -->
+  <input
+    type="password"
+    id="password"
+    name="password"
+    placeholder="Passwort"
+  />
+
+  <!-- Passwort-Bestätigung -->
+  <input
+    type="password"
+    id="confirm-password"
+    name="confirm-password"
+    placeholder="Passwort bestätigen"
+    [(ngModel)]="confirmPassword"
+    required
+  />
+  @if (confirmPassword && password && confirmPassword !== password) {
+    <div class="error">Die Passwörter stimmen nicht überein.</div>
+  }
+
+  <!-- Registrieren -->
+  <button class="login" type="submit">Registrieren</button>
+  <button class="register" type="button" (click)="navigateToLogin()">Zurück zum Login</button>
+</form>

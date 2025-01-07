@@ -1,12 +1,24 @@
-<div class="sidebar-header">
-  <button class="hamburger-menu" (click)="toggleMenu()">☰</button>
+<!-- sidebar.component.html -->
+
+<!-- Header bleibt immer sichtbar -->
+<header class="sidebar-header">
+  <button class="hamburger-menu" (click)="toggleMenu()" aria-label="Menü öffnen">☰</button>
   <a (click)="navigateTo('/main')" class="logo-link">
     <h1 class="logo">Journal!X</h1>
   </a>
-</div>
+</header>
 
+<!-- Overlay für mobile Ansicht -->
+<div class="overlay" [ngClass]="{'active': isMenuOpen}" (click)="toggleMenu()"></div>
+
+<!-- Sidebar -->
 <nav class="sidebar" [class.open]="isMenuOpen">
   <ul>
+    <li class="sidebar-logo">
+      <a (click)="navigateTo('/main')" class="logo-link">
+        <h1 class="logo">Journal!X</h1>
+      </a>
+    </li>
     <li><a (click)="navigateTo('/main')">Hauptseite</a></li>
     <li><a (click)="navigateTo('/profile')">Profil</a></li>
     <li><a (click)="navigateTo('/templates')">Templates</a></li>

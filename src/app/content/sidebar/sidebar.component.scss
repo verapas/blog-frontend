@@ -1,9 +1,5 @@
 .sidebar-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  padding-top: 20px;
-  background-color: white;
+  display: none;
 }
 
 .hamburger-menu {
@@ -32,51 +28,6 @@
 
 .logo-link:hover {
   opacity: 0.8;
-}
-
-@media (max-width: 1000px) {
-  .hamburger-menu {
-    display: block;
-    padding-top: 4px;
-  }
-
-  .sidebar-header {
-
-    //justify-content: center;
-    background-color: transparent;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    padding-top:0px;
-    //width: 100%;
-
-  }
-
-  .logo-link {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 12px;
-  }
-
-  .sidebar {
-    display: none;
-    position: fixed;
-    top: 60px;
-    height: auto;
-    max-height: calc(100vh - 60px);
-    //z-index: 999;
-  }
-
-  .sidebar.open {
-    display: block;  //transform: translateY(0);
-    width: calc(100% - 43px);
-    margin: 20px;
-    border-radius: 10px;
-    height: auto;
-    border: 2px solid #8e8e8e;
-
-
-  }
 }
 
 .sidebar {
@@ -123,5 +74,53 @@
     color: white;
   }
 }
+
+@media (max-width: 1000px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .sidebar-header {
+    display: flex;
+    background-color: transparent;
+    padding-left: 20px;
+    padding-top: 5px;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 12px;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+  }
+
+  .sidebar.open {
+    display: block; //transform: translateY(0);
+    width: calc(100% - 10px);
+    margin: 5px;
+    border-radius: 10px;
+    height: auto;
+    border: 2px solid #8e8e8e;
+  }
+
+  .sidebar.open h1 {
+    display: none;
+  }
+
+  .sidebar a {
+    font-size: xx-large; /* Passe diesen Wert nach Bedarf an */
+  }
+
+  .sidebar-logo {
+    display: none;
+  }
+}
+
+
 
 

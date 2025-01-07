@@ -1,19 +1,19 @@
+// sidebar.component.ts
 import { Component } from '@angular/core';
-import {Router, RouterModule} from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, NgClass],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
-
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
   isMenuOpen = false;
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

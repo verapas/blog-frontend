@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {Router, RouterModule} from '@angular/router';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { afterNextRender, Component, DestroyRef, EventEmitter, inject, Output, viewChild } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -11,31 +12,33 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  email: string = '';
-  confirmEmail: string = '';
-  password: string = '';
-  confirmPassword: string = '';
+  @Output() switchToLogin = new EventEmitter<void>();
 
-  isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+
+  constructor(private router: Router) {
   }
 
-  onRegister(event: Event) {
-    event.preventDefault();
-    if (
-      this.isValidEmail(this.email) &&
-      this.email === this.confirmEmail &&
-      this.password === this.confirmPassword
-    ) {
-      alert('Registrierung erfolgreich!');
-      // Hier API-Aufruf oder Weiterleitung implementieren
+  onSubmit(formData: NgForm) {
+    if (formData.valid) {
+      const enteredEmail = formData.value.email;
+      const enteredConfirmEmail = formData.value.confirmEmail;
+      const enteredPassword = formData.value.password;
+      const enteredConfirmPassword = formData.value.confirmPassword;
+
+      if (enteredEmail === enteredConfirmEmail && enteredPassword === enteredConfirmPassword) {
+        console.log('Registrierung:', enteredEmail, enteredPassword);
+
+        // Hier die Logik für die Registrierung implementieren
+        // z.B. API-Aufruf oder Weiterleitung
+
+        this.router.navigate(['/main']);
+      } else {
+        console.log('E-Mail-Adressen oder Passwörter stimmen nicht überein');
+      }
     } else {
-      alert('Bitte Eingaben überprüfen.');
+      console.log('Formular ist ungültig');
     }
   }
-
-  @Output() switchToLogin = new EventEmitter<void>();
 
   navigateToLogin(): void {
     this.switchToLogin.emit();

@@ -1,60 +1,71 @@
-<form (submit)="onRegister($event)">
-  <input
-    type="text"
-    id="username"
-    name="username"
-    placeholder="Benutzername"
-  />
-
-  <!-- Erste E-Mail-Eingabe -->
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
   <input
     type="email"
     id="email"
     name="email"
     placeholder="Email-Adresse"
-    [(ngModel)]="email"
-    #emailInput="ngModel"
+    ngModel
     required
-  />
-  @if (emailInput.touched && !isValidEmail(email) ) {
-    <div class="error">Bitte eine gültige E-Mail eingeben.</div>
+    email
+    #email="ngModel"
+  >
+
+  @if (email.touched && email.dirty && email.invalid) {
+    <p class="control-error">
+      Ungültige E-Mail-Adresse eingegeben
+    </p>
   }
 
-  <!-- Bestätigungs-E-Mail-Eingabe -->
   <input
-    type="email"
-    id="email-verification"
-    name="email-verification"
-    placeholder="Email-Adresse erneut eingeben"
-    [(ngModel)]="confirmEmail"
+    type="confirmEmail"
+    id="confirmEmail"
+    name="confirmEmail"
+    placeholder="Email-Adresse bestätigen"
+    ngModel
     required
-  />
-  @if (email && confirmEmail && email !== confirmEmail) {
-    <div class="error">Die E-Mails stimmen nicht überein.</div>
+    email
+    #confirmEmail="ngModel"
+  >
+
+  @if (confirmEmail.touched && confirmEmail.dirty && confirmEmail.value !== email.value) {
+    <p class="control-error">
+      E-Mail-Adresse stimmt nicht überein
+    </p>
   }
 
-  <!-- Passwort -->
   <input
     type="password"
     id="password"
     name="password"
     placeholder="Passwort"
-  />
-
-  <!-- Passwort-Bestätigung -->
-  <input
-    type="password"
-    id="confirm-password"
-    name="confirm-password"
-    placeholder="Passwort bestätigen"
-    [(ngModel)]="confirmPassword"
+    ngModel
     required
-  />
-  @if (confirmPassword && password && confirmPassword !== password) {
-    <div class="error">Die Passwörter stimmen nicht überein.</div>
+    minlength="6"
+    #password="ngModel"
+  >
+
+  @if (password.touched && password.dirty && password.invalid) {
+    <p class="control-error">
+      Passwort muss mindestens 6 Zeichen lang sein
+    </p>
   }
 
-  <!-- Registrieren -->
-  <button class="login" type="submit">Registrieren</button>
-  <button class="register" type="button" (click)="navigateToLogin()">Zurück zum Login</button>
+  <input
+    type="password"
+    id="confirmPassword"
+    name="confirmPassword"
+    placeholder="Passwort bestätigen"
+    ngModel
+    required
+    #confirmPassword="ngModel"
+  >
+
+  @if (confirmPassword.touched && confirmPassword.dirty && confirmPassword.value !== password.value) {
+    <p class="control-error">
+      Passwörter stimmen nicht überein
+    </p>
+  }
+
+  <button class="register" type="submit">Registrieren</button>
+  <button class="login" type="button" (click)="navigateToLogin()">Zurück zum Login</button>
 </form>

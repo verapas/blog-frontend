@@ -1,9 +1,43 @@
 
-  <form (submit)="onLogin($event)">
-    <input type="text" id="username" name="username" placeholder="Benutzername">
-    <input type="password" id="password" name="password" placeholder="Passwort">
+  <form (submit)="onLogin($event)" #form="ngForm" (ngSubmit)="onSubmit(form)">
+
+    <input
+      type="text"
+      id="email"
+      name="email"
+      placeholder="E-Mail Addresse"
+      ngModel
+      required
+      email
+      #email="ngModel"
+    >
+
+    @if (email.touched && email.dirty && email.invalid){
+      <p class="control-error">
+        Ungültige Email adresse
+      </p>
+    }
+
+    <input
+      type="password"
+      id="password"
+      name="password"
+      placeholder="Passwort"
+      ngModel
+      required
+      minlength="6"
+      #password="ngModel"
+    >
+
+    @if (password.touched && password.dirty && password.invalid){
+      <p class="control-error">
+        Ungültiges Passwort<br>
+        (mind. 6 Zeichen)
+      </p>
+    }
 
     <button class="login" type="submit">Login</button>
     <button class="register" type="button" (click)="navigateToRegister()">Neues Konto erstellen</button>
+
   </form>
 

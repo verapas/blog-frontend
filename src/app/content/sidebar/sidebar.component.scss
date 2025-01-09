@@ -9,13 +9,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10; /* Höher als das Overlay */
-  transition: transform 0.3s ease; /* Transition für das Verschieben */
-  transform: translateX(0); /* Anfangsposition */
+  z-index: 10;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
 }
 
 .sidebar.open {
-  transform: translateX(0); /* Sidebar sichtbar */
+  transform: translateX(0);
 }
 
 /* Overlay-Stile */
@@ -25,14 +25,14 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0); /* Anfangszustand: transparent */
+  background-color: rgba(0, 0, 0, 0);
   visibility: hidden;
   transition: background-color 0.3s ease, visibility 0.3s ease;
   z-index: 9; /* Unterhalb der Sidebar */
 }
 
 .overlay.active {
-  background-color: rgba(0, 0, 0, 0.5); /* Halbtransparentes Schwarz */
+  background-color: rgba(0, 0, 0, 0.5);
   visibility: visible;
 }
 
@@ -106,12 +106,6 @@
   }
 }
 
-//@media (max-width: 800px) {
-//  .sidebar {
-//    transform: translateX(-120%);
-//  }
-//}
-
 /* Mobile-Ansicht */
 @media (max-width: 1000px) {
   /* Hamburger-Menü sichtbar machen */
@@ -135,32 +129,18 @@
     padding-top: 12px;
   }
 
-  /* Sidebar im mobilen Zustand */
   .sidebar {
-    width: 300px;
-    height: auto;
-    border: 2px solid #8e8e8e;
-    border-radius: 10px;
-    margin-top: 75px;
-    /* Entferne margin-left */
-    margin-left: 15px;
-    /* Stelle sicher, dass left auf 0 gesetzt ist */
-    left: 0;
-    /* Verschiebe die Sidebar vollständig nach links */
     transform: translateX(-120%);
   }
 
-  /* Überschrift in der Sidebar ausblenden */
   .sidebar.open h1 {
     display: none;
   }
 
-  /* Schriftgröße der Links anpassen */
   .sidebar a {
-    font-size: small; /* Passe diesen Wert nach Bedarf an */
+    font-size: larger;
   }
 
-  /* Logo in der Sidebar ausblenden */
   .sidebar-logo {
     display: none;
   }

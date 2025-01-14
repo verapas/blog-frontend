@@ -6,6 +6,7 @@ import {ProfileComponent} from './content/profile/profile.component';
 import {TemplatesComponent} from './content/templates/templates.component';
 import {PostsComponent} from './content/posts/posts.component';
 import {ContentComponent} from './content/content.component';
+import {SettingsComponent} from './content/settings/settings.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'templates', component: TemplatesComponent },
       { path: 'posts', component: PostsComponent },
+      { path: 'settings', component: SettingsComponent },
     ]
   },
   { path: '**', redirectTo: '/login' }

@@ -1,25 +1,58 @@
 :host {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  height: 100vh;
   overflow: hidden;
 }
 
 .elements-wrapper {
   display: flex;
   flex: 1;
+  overflow: hidden;
+}
+
+.content-overview {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .content-wrapper {
   flex: 1;
   display: flex;
-  justify-content: left;
-  border-radius: 10px;
+  flex-direction: column;
   max-width: 1000px;
   min-width: 600px;
   background-color: #fff;
-  height: calc(97.5% - 20px);
-  width: 100%;
-  box-sizing: border-box;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  height: calc(100% - 30px);
+}
+
+router-outlet + * {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.elements-wrapper::-webkit-scrollbar {
+  width: 8px; /* Breite der Scrollbar */
+}
+
+.elements-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Hintergrund der Scrollbar-Leiste */
+  border-radius: 10px; /* Abgerundete Ecken */
+}
+
+.elements-wrapper::-webkit-scrollbar-thumb {
+  background: #888; /* Farbe des Scrollbalkens */
+  border-radius: 10px; /* Abgerundete Ecken */
+}
+
+.elements-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Farbe des Scrollbalkens beim Hover */
 }
 
 @media (max-width: 1500px) {

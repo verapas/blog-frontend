@@ -5,6 +5,12 @@
   width: 100vw;
 }
 
+//html, body {
+//  height: 100%; /* Stellt sicher, dass die Seite die gesamte Höhe des Viewports hat */
+//  margin: 0; /* Entfernt Standardabstände */
+//  overflow-x: hidden; /* Verhindert horizontales Scrollen */
+//}
+
 .content-area {
   display: flex;
   flex: 1;
@@ -12,24 +18,24 @@
 }
 
 
-.elements-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  width: 100%;
-}
-
-.content-wrapper {
-  border-radius: 10px;
-  width: calc(100% - 200px - 300px);
-  max-width: 1200px;
-  min-width: 600px;
-  margin-right: 150px;
-  margin-left: 150px;
-  background-color: #fff;
-  padding: 20px;
-  height: calc(95% - 40px);
-}
+//.elements-wrapper {
+//  display: flex;
+//  flex-direction: row;
+//  height: 100%;
+//  width: 100%;
+//}
+//
+//.content-wrapper {
+//  border-radius: 10px;
+//  width: calc(100% - 200px - 300px);
+//  max-width: 1200px;
+//  min-width: 600px;
+//  margin-right: 150px;
+//  margin-left: 150px;
+//  background-color: #fff;
+//  padding: 20px;
+//  height: calc(95% - 40px);
+//}
 
 
 app-sidebar {

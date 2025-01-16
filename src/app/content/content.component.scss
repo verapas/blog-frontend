@@ -13,17 +13,13 @@
   flex: 1;
   display: flex;
   justify-content: left;
-  padding: 25px;
-  padding-top: 20px;
   border-radius: 10px;
   max-width: 1000px;
   min-width: 600px;
-  //margin: 20px auto;
   background-color: #fff;
   height: calc(97.5% - 20px);
   width: 100%;
   box-sizing: border-box;
-  //border: 2px solid darkgray;
 }
 
 @media (max-width: 1500px) {

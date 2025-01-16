@@ -32,25 +32,31 @@ export class MainPageComponent {
         if (editor.html.get() === '') {
           const today = new Date().toLocaleDateString();
           const template = `
-            <h2>Arbeitsjournal vom ${today}</h2>
-            <table style="width: 100%;">
-              <thead>
-                <tr>
-                  <th>Tätigkeit</th>
-                  <th>Dauer</th>
-                  <th>Fortschritt/Anmerkungen</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-            <h3>Reflexion</h3>
-            <p>Schreibe deine Reflexion hier...</p>
+<h2 style="margin-top: 0;">Arbeitsjournal vom ${today}</h2>
+  <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+    <thead>
+      <tr>
+        <th style="text-align: left; vertical-align: top; padding: 8px; border: 1px solid #ddd;">
+          Tätigkeit
+        </th>
+        <th style="text-align: left; vertical-align: top; padding: 8px; border: 1px solid #ddd;">
+          Dauer
+        </th>
+        <th style="text-align: left; vertical-align: top; padding: 8px; border: 1px solid #ddd;">
+          Fortschritt/Anmerkungen
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left; vertical-align: top; padding: 8px; border: 1px solid #ddd;"></td>
+        <td style="text-align: left; vertical-align: top; padding: 8px; border: 1px solid #ddd;"></td>
+        <td style="text-align: left; vertical-align: top; padding: 8px; border: 1px solid #ddd;"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Reflexion</h3>
+  <p>Schreibe deine Reflexion hier...</p>
           `;
           editor.html.set(template);
         }

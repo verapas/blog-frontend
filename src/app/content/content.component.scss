@@ -27,7 +27,7 @@
   background-color: #fff;
   margin: 20px;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: auto;
   height: calc(100% - 30px);
 }
 
@@ -37,21 +37,21 @@ router-outlet + * {
   padding: 20px;
 }
 
-.elements-wrapper::-webkit-scrollbar {
+.content-wrapper::-webkit-scrollbar {
   width: 8px; /* Breite der Scrollbar */
 }
 
-.elements-wrapper::-webkit-scrollbar-track {
+.content-wrapper::-webkit-scrollbar-track {
   background: #f1f1f1; /* Hintergrund der Scrollbar-Leiste */
   border-radius: 10px; /* Abgerundete Ecken */
 }
 
-.elements-wrapper::-webkit-scrollbar-thumb {
+.content-wrapper::-webkit-scrollbar-thumb {
   background: #888; /* Farbe des Scrollbalkens */
   border-radius: 10px; /* Abgerundete Ecken */
 }
 
-.elements-wrapper::-webkit-scrollbar-thumb:hover {
+.content-wrapper::-webkit-scrollbar-thumb:hover {
   background: #555; /* Farbe des Scrollbalkens beim Hover */
 }
 

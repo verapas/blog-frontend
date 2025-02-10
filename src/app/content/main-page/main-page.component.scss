@@ -1,58 +1,42 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: visible;
+.welcome-container {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 }
 
-.editor-container {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  overflow: visible;
-  padding: 15px;
-  padding-top: 0px;
+.last-entry-container {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .froala-view-container {
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
 }
-
-.top-container {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-}
-
-.top-container h2 {
-  margin: 0;
-}
-
-.editor {
-  flex: 1 1 auto;
-  overflow: auto;
-}
-
-
-:host .fr-box.fr-basic {
-  overflow: visible;
-}
-
-button  {
-  font-size: smaller;
-  border: 1px solid black;
-  height: 30px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-bottom-color 0.3s ease;
-  //background-color: cornflowerblue;
-
-}
-
-button:hover {
-  //border: 2px solid black;
-  background-color: #c8c8c8;
-}
-
-
-
-
-
-

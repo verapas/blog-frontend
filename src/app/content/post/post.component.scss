@@ -1,0 +1,56 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: visible;
+}
+
+.editor-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  padding: 15px;
+  padding-top: 0px;
+}
+
+.top-container {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.top-container h2 {
+  margin: 0;
+}
+
+.editor {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+
+:host .fr-box.fr-basic {
+  overflow: visible;
+}
+
+button  {
+  font-size: smaller;
+  border: 1px solid black;
+  height: 30px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-bottom-color 0.3s ease;
+  //background-color: cornflowerblue;
+
+}
+
+button:hover {
+  //border: 2px solid black;
+  background-color: #c8c8c8;
+}
+
+
+
+

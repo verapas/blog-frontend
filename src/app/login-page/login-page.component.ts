@@ -5,6 +5,8 @@ import {RegisterComponent} from './register/register.component';
 import { CommonModule } from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {filter} from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
+import { UserControllerService } from '../openapi-client';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +15,8 @@ import {filter} from 'rxjs';
     HeaderComponent,
     RegisterComponent,
     LoginComponent,
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',

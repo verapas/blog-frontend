@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-api": "openapi-generator-cli generate -i http://localhost:8080/v3/api-docs -g typescript-angular -o src/app/openapi-client"
   },
   "private": true,
   "dependencies": {
@@ -19,11 +20,12 @@
     "@angular/platform-browser-dynamic": "^18.2.12",
     "@angular/router": "^18.2.12",
     "@types/quill": "^2.0.14",
-    "angular-froala-wysiwyg": "^4.3.1",
+    "angular-froala-wysiwyg": "^4.4.0",
     "core-js": "^3.39.0",
     "font-awesome": "^4.7.0",
-    "froala-editor": "^4.3.1",
+    "froala-editor": "^4.4.0",
     "http-proxy-middleware": "^3.0.3",
+    "jwt-decode": "^4.0.0",
     "quill": "^2.0.2",
     "quill-better-table": "^1.2.10",
     "quill-table": "^1.0.0",

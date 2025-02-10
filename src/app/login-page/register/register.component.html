@@ -1,71 +1,73 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
-  <input
-    type="email"
-    id="email"
-    name="email"
-    placeholder="Email-Adresse"
-    ngModel
-    required
-    email
-    #email="ngModel"
-  >
+<!--Todo hier noch schöner gestalten, elemente nebeneinander, eventuell jeweils mit überschrift anstelle im input feld, auch login eventuell überarbeiten-->
 
-  @if (email.touched && email.dirty && email.invalid) {
-    <p class="control-error">
-      Ungültige E-Mail-Adresse eingegeben
-    </p>
-  }
+<form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()" class="register-form">
+  <div class="form">
+    <h2>Registrieren</h2>
 
-  <input
-    type="confirmEmail"
-    id="confirmEmail"
-    name="confirmEmail"
-    placeholder="Email-Adresse bestätigen"
-    ngModel
-    required
-    email
-    #confirmEmail="ngModel"
-  >
+    <!-- Vorname-Feld -->
+    <input id="firstName" type="text" formControlName="firstName" placeholder="Vorname eingeben" />
+    @if (registerFormGroup.get('firstName')?.touched && registerFormGroup.get('firstName')?.invalid) {
+      <p class="control-error">
+        @if (registerFormGroup.get('firstName')?.hasError('required')) { Vorname ist erforderlich. }
+      </p>
+    }
 
-  @if (confirmEmail.touched && confirmEmail.dirty && confirmEmail.value !== email.value) {
-    <p class="control-error">
-      E-Mail-Adresse stimmt nicht überein
-    </p>
-  }
+    <!-- Nachname-Feld -->
+    <input id="lastName" type="text" formControlName="lastName" placeholder="Nachname eingeben" />
+    @if (registerFormGroup.get('lastName')?.touched && registerFormGroup.get('lastName')?.invalid) {
+      <p class="control-error">
+        @if (registerFormGroup.get('lastName')?.hasError('required')) { Nachname ist erforderlich. }
+      </p>
+    }
 
-  <input
-    type="password"
-    id="password"
-    name="password"
-    placeholder="Passwort"
-    ngModel
-    required
-    minlength="6"
-    #password="ngModel"
-  >
+    <!-- E-Mail-Feld -->
+    <input id="email" type="email" formControlName="email" placeholder="E-Mail eingeben" />
+    @if (registerFormGroup.get('email')?.touched && registerFormGroup.get('email')?.invalid) {
+      <p class="control-error">
+        @if (registerFormGroup.get('email')?.hasError('required')) { E-Mail ist erforderlich. }
+        @if (registerFormGroup.get('email')?.hasError('email')) { Ungültige E-Mail-Adresse. }
+      </p>
+    }
 
-  @if (password.touched && password.dirty && password.invalid) {
-    <p class="control-error">
-      Passwort muss mindestens 6 Zeichen lang sein
-    </p>
-  }
+    <!-- E-Mail bestätigen-Feld -->
+    <input id="confirmEmail" type="email" formControlName="confirmEmail" placeholder="E-Mail bestätigen" />
+    @if (registerFormGroup.get('confirmEmail')?.touched && registerFormGroup.get('confirmEmail')?.invalid) {
+      <p class="control-error">
+        @if (registerFormGroup.get('confirmEmail')?.hasError('required')) { E-Mail-Bestätigung ist erforderlich. }
+        @if (registerFormGroup.get('confirmEmail')?.hasError('email')) { Ungültige E-Mail-Adresse. }
+      </p>
+    }
+    @if (registerFormGroup.get('email')?.value !== registerFormGroup.get('confirmEmail')?.value && registerFormGroup.get('confirmEmail')?.touched) {
+      <p class="control-error">E-Mail-Adressen stimmen nicht überein.</p>
+    }
 
-  <input
-    type="password"
-    id="confirmPassword"
-    name="confirmPassword"
-    placeholder="Passwort bestätigen"
-    ngModel
-    required
-    #confirmPassword="ngModel"
-  >
+    <!-- Passwort-Feld -->
+    <input id="password" type="password" formControlName="password" placeholder="Passwort eingeben" />
+    @if (registerFormGroup.get('password')?.touched && registerFormGroup.get('password')?.invalid) {
+      <p class="control-error">
+        @if (registerFormGroup.get('password')?.hasError('required')) { Passwort ist erforderlich. }
+        @if (registerFormGroup.get('password')?.hasError('minlength')) { Passwort muss mindestens 6 Zeichen lang sein. }
+      </p>
+    }
 
-  @if (confirmPassword.touched && confirmPassword.dirty && confirmPassword.value !== password.value) {
-    <p class="control-error">
-      Passwörter stimmen nicht überein
-    </p>
-  }
+    <!-- Passwort bestätigen-Feld -->
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Passwort bestätigen" />
+    @if (registerFormGroup.get('confirmPassword')?.touched && registerFormGroup.get('confirmPassword')?.invalid) {
+      <p class="control-error">
+        @if (registerFormGroup.get('confirmPassword')?.hasError('required')) { Passwort-Bestätigung ist erforderlich. }
+      </p>
+    }
+    @if (registerFormGroup.get('password')?.value !== registerFormGroup.get('confirmPassword')?.value && registerFormGroup.get('confirmPassword')?.touched) {
+      <p class="control-error">Passwörter stimmen nicht überein.</p>
+    }
 
-  <button class="register" type="submit">Registrieren</button>
-  <button class="login" type="button" (click)="navigateToLogin()">Zurück zum Login</button>
+    <!-- Allgemeine Fehlernachricht -->
+    @if (errorMessage) {
+      <p class="control-error">{{ errorMessage }}</p>
+    }
+
+    <!-- Buttons -->
+    <button type="submit" [disabled]="registerFormGroup.invalid">Registrieren</button>
+    <button type="button" (click)="navigateToLogin()">Zurück zum Login</button>
+  </div>
 </form>

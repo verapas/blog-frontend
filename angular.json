@@ -24,32 +24,47 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "deployUrl": "",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/"
               }
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/quill/dist/quill.core.css",
-              "node_modules/quill/dist/quill.snow.css"
+              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "./node_modules/froala-editor/css/froala_style.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/froala-editor/js/froala_editor.pkgd.min.js",
+              "node_modules/froala-editor/js/plugins/fullscreen.min.js",
+              "node_modules/froala-editor/js/plugins.pkgd.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "froala-editor",
+              "froala-editor/js/plugins/table.min.js",
+              "node_modules/froala-editor/js/plugins/fullscreen.min.js",
+              "froala-editor/js/plugins/fullscreen.min.js",
+              "froala-editor/js/plugins.pkgd.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
@@ -75,7 +90,10 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n"
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "blog-frontend:build"
+          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -87,15 +105,11 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/froala-editor/css/froala_editor.pkgd.css",
-              "node_modules/froala-editor/css/froala_style.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

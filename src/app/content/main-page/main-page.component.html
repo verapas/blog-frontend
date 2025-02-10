@@ -1,9 +1,15 @@
-<div class="top-container">
-  <h2>Neuen Eintrag erstellen</h2>
-  <button class="save-button" (click)="savePost()">Veröffentlichen</button>
+<div class="welcome-container">
+  <h1>Willkommen bei Journal!X</h1>
+  <p>Dein persönliches Arbeitsjournal. Halte deine Fortschritte fest, reflektiere über deinen Tag und bleib organisiert.</p>
 </div>
 
-<div class="editor-container">
-  <div class="editor custom-froala" [froalaEditor]="froalaOptions"></div>
-</div>
+<div class="last-entry-container">
+  <h2>Dein letzter Eintrag</h2>
 
+  @if (!lastEntry) {
+    <p>Noch kein Eintrag vorhanden. Erstelle deinen ersten <a routerLink="/post">hier</a>.</p>
+  } @else {
+    <div class="froala-view-container" [innerHTML]="lastEntry"></div>
+    <button routerLink="/eintrag">Eintrag bearbeiten</button>
+  }
+</div>

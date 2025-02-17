@@ -1,8 +1,8 @@
-import { afterNextRender, Component, DestroyRef, EventEmitter, inject, Output, viewChild } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {UserControllerService} from '../../openapi-client';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +12,8 @@ import { debounceTime } from 'rxjs';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  userControllerService = inject(UserControllerService);
   router = inject(Router);
 
   errorMessage: string | null = null;
@@ -37,23 +39,26 @@ export class RegisterComponent {
     const formData = this.registerFormGroup.value;
 
     // Prüfe, ob E-Mail und Passwort übereinstimmen
-    if (formData.email !== formData.confirmEmail) {
-      this.errorMessage = 'E-Mail-Adressen stimmen nicht überein.';
-      return;
-    }
-    if (formData.password !== formData.confirmPassword) {
-      this.errorMessage = 'Passwörter stimmen nicht überein.';
-      return;
-    }
+    this.userControllerService.registerUser({
+      firstName: formData.firstName!,
+      lastName: formData.lastName!,
+      email: formData.email!,
+      password: formData.password!
+    }).subscribe({
+      next: () => {
+        // Bei Erfolg Weiterleitung zum Login
+        console.log('Registrierung erfolgreich mit diesen Daten: ', formData);
+        this.router.navigate(['/auth/login']);
 
-    // Todo Hier  die Logik für die Registrierung implementieren, beispielsweise einen API-Aufruf, der die Daten an das Backend sendet.
-    console.log('Registrierung erfolgreich mit Daten:', formData);
-
-    // Bei Erfolg: Navigation zur Hauptseite (oder zu einem anderen Ziel)
-    this.router.navigate(['/main']);
+      },
+      error: (err) => {
+        // Fehlermeldung speichern
+        this.errorMessage = err.error?.message || 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.';
+      }
+    });
   }
 
-  navigateToLogin(): void {
-    this.router.navigate(['/login']);
+  navigateToLogin() {
+
   }
 }

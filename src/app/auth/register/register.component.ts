@@ -58,7 +58,9 @@ export class RegisterComponent {
     });
   }
 
-  navigateToLogin() {
-
+  navigateToLogin(): void {
+    this.router.navigate(['/auth/login']);
   }
+
+
 }

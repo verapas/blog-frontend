@@ -48,7 +48,10 @@ export class LoginComponent {
       next: (response) => {
         if (response.token) {
           console.log('Bearer Token:', response.token);
+
+          // TODO hier mittels sicheren cookies den token speichern, nicht local-storage
           localStorage.setItem('ACCESS_TOKEN', response.token);
+
           console.log('Login erfolgreich! Willkommen zurück.');
           this.router.navigate(['/main']);
         } else {

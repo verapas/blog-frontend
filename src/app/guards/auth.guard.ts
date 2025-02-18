@@ -6,15 +6,11 @@ interface JwtPayload {
   exp: number;
   roles?: string[];
 }
-
 /**
  * @function authGuard
- * @description Überprüft, ob der Benutzer authentifiziert ist.
- * Falls das Token abgelaufen oder nicht vorhanden ist, wird zur Login-Seite weitergeleitet.
- * Es wird keine spezifische Admin-Prüfung durchgeführt, da alle authentifizierten Benutzer Zugriff haben.
- * @param route Die aktuelle Route, die aufgerufen wird.
- * @param state Der aktuelle RouterStateSnapshot.
- * @returns `true`, wenn der Benutzer Zugriff hat, sonst `false` (Umleitung zur Login-Seite).
+ * @description Überprüft, ob der Benutzer authentifiziert ist und,
+ * falls in der Route erlaubte Rollen definiert sind (data.roles),
+ * ob der Benutzer mindestens eine dieser Rollen besitzt.
  */
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -22,7 +18,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (!token) {
     console.warn('Kein Token gefunden, Umleitung zur Login-Seite.');
-    router.navigate(['/login']);
+    router.navigate(['/auth/login']);
     return false;
   }
 
@@ -33,11 +29,22 @@ export const authGuard: CanActivateFn = (route, state) => {
     if (decoded.exp < currentTime) {
       console.warn('Token abgelaufen, Umleitung zur Login-Seite.');
       localStorage.removeItem('ACCESS_TOKEN');
-      router.navigate(['/login']);
+      router.navigate(['/auth/login']);
       return false;
     }
 
-    // todo falls Admin-bereich implementiert wird hier noch ergänzen
+    // Falls in der Route erlaubte Rollen definiert sind:
+    if (route.data && route.data?.['role']) {
+      const allowedRoles = route.data?.['role'] as string[];
+      const userRoles = decoded.roles || [];
+      const hasRole = allowedRoles.some(role => userRoles.includes(role));
+
+      if (!hasRole) {
+        console.warn('Benutzer hat nicht die erforderliche Rolle.');
+        router.navigate(['/unauthorized']); // Eine Option: Zeige eine Seite "Zugriff verweigert" an
+        return false;
+      }
+    }
 
     return true;
   } catch (error) {

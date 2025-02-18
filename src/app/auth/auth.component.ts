@@ -18,12 +18,12 @@ import { UserControllerService } from '../openapi-client';
     CommonModule,
     HttpClientModule
   ],
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss',
+  templateUrl: './auth.component.html',
+  styleUrl: './auth.component.scss',
   encapsulation: ViewEncapsulation.None
 })
 
-export class LoginPageComponent implements OnInit {
+export class AuthComponent implements OnInit {
   isLoginMode = true;
 
   constructor(private router: Router) {

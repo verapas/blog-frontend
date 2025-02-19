@@ -15,6 +15,10 @@ export const authRoutes: Routes = [
         loadComponent: () => import('./register/register.component').then(c => c.RegisterComponent),
       },
       {
+        path: 'unauthorized',
+        loadComponent: () => import('./unauthorized/unauthorized.component').then(c => c.UnauthorizedComponent),
+      },
+      {
         path: '', redirectTo: 'login', pathMatch: 'full'
       }
     ]

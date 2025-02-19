@@ -1,10 +1,9 @@
 import {afterNextRender, Component, DestroyRef, EventEmitter, inject, Output, viewChild} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
-import {debounceTime} from 'rxjs';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserControllerService} from '../../openapi-client';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +15,7 @@ import {UserControllerService} from '../../openapi-client';
 export class LoginComponent {
   userControllerService = inject(UserControllerService);
   router = inject(Router);
+  toastr = inject(ToastrService);
 
   errorMessage: string | null = null;
 
@@ -36,6 +36,7 @@ export class LoginComponent {
     if (this.loginFormGroup.invalid) {
       this.loginFormGroup.markAllAsTouched();
       console.warn('Bitte fülle alle Felder korrekt aus.');
+      this.toastr.error('Bitte fülle alle Felder korrekt aus.', 'Fehler');
       return;
     }
 
@@ -49,21 +50,23 @@ export class LoginComponent {
         if (response.token) {
           console.log('Bearer Token:', response.token);
 
-          // TODO hier mittels sicheren cookies den token speichern, nicht local-storage
+          // TODO: Token sicher in Cookies speichern, nicht im Local Storage!
           localStorage.setItem('ACCESS_TOKEN', response.token);
 
           console.log('Login erfolgreich! Willkommen zurück.');
-          this.router.navigate(['/main']);
+          this.toastr.success('Login erfolgreich! Willkommen zurück.', 'Erfolg');
+          this.router.navigate(['/content/main-page']);
         } else {
           this.errorMessage = 'Token fehlt in der API-Antwort.';
           console.error('Token fehlt in der Antwort:', response);
+          this.toastr.error('Token fehlt in der API-Antwort.', 'Fehler');
         }
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Login fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.';
         console.error('Fehler beim Login:', err);
+        this.toastr.error(this.errorMessage ?? 'Login fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.', 'Fehler');
       }
     });
   }
-
 }

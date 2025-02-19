@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserControllerService} from '../../openapi-client';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,7 @@ export class RegisterComponent {
 
   userControllerService = inject(UserControllerService);
   router = inject(Router);
+  toastr = inject(ToastrService);
 
   errorMessage: string | null = null;
 
@@ -33,6 +35,7 @@ export class RegisterComponent {
     if (this.registerFormGroup.invalid) {
       this.registerFormGroup.markAllAsTouched();
       console.warn('Bitte füllen Sie alle Felder korrekt aus.');
+      this.toastr.error('Bitte füllen Sie alle Felder korrekt aus.', 'Fehler');
       return;
     }
 
@@ -46,14 +49,13 @@ export class RegisterComponent {
       password: formData.password!
     }).subscribe({
       next: () => {
-        // Bei Erfolg Weiterleitung zum Login
         console.log('Registrierung erfolgreich mit diesen Daten: ', formData);
+        this.toastr.success('Registrierung erfolgreich', 'Erfolg');
         this.router.navigate(['/auth/login']);
-
       },
       error: (err) => {
-        // Fehlermeldung speichern
         this.errorMessage = err.error?.message || 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.';
+        this.toastr.error(this.errorMessage ?? 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.', 'Fehler');
       }
     });
   }
@@ -61,6 +63,4 @@ export class RegisterComponent {
   navigateToLogin(): void {
     this.router.navigate(['/auth/login']);
   }
-
-
 }

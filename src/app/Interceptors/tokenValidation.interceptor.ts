@@ -2,6 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import {CookieService} from 'ngx-cookie-service';
 
 /**
  * Überprüft, ob das JWT-Token abgelaufen ist.
@@ -17,15 +18,15 @@ const isTokenExpired = (token: string): boolean => {
   }
 };
 
-
 export const tokenValidationInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
-  const token = localStorage.getItem('ACCESS_TOKEN');
+  const cookieService = inject(CookieService);
+  const token = cookieService.get('JOURNALIX_ACCESS_TOKEN');
 
   if (token) {
     if (isTokenExpired(token)) {
-      // Token ist abgelaufen -> Benutzer ausloggen
-      localStorage.removeItem('ACCESS_TOKEN');
+      // Token ist abgelaufen → Token im Cookie löschen
+      cookieService.delete('JOURNALIX_ACCESS_TOKEN', '/');
       alert('Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.');
       router.navigate(['/auth/login']);
       return next(req);

@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserControllerService} from '../../openapi-client';
 import {ToastrService} from 'ngx-toastr';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   userControllerService = inject(UserControllerService);
   router = inject(Router);
   toastr = inject(ToastrService);
-
+  cookieService = inject(CookieService);
   errorMessage: string | null = null;
 
   loginFormGroup = new FormGroup({
@@ -50,8 +51,17 @@ export class LoginComponent {
         if (response.token) {
           console.log('Bearer Token:', response.token);
 
-          // TODO: Token sicher in Cookies speichern, nicht im Local Storage!
-          localStorage.setItem('ACCESS_TOKEN', response.token);
+          // Statt localStorage speichern wir den Token in einem Cookie.
+          // Beachte: Hier kannst du keine HttpOnly-Cookies setzen, wenn du es clientseitig machst.
+          this.cookieService.set(
+            'JOURNALIX_ACCESS_TOKEN',       // Name des Cookies
+            response.token,       // Wert des Cookies
+            undefined,            // Keine explizite Ablaufzeit (Sitzungscookie)
+            '/', // Pfad
+            undefined,            // Keine Domain explizit angeben
+            true,                 // secure: true – das Cookie wird nur über HTTPS gesendet
+            'Strict'              // sameSite: 'Strict' – das Cookie wird nur an gleiche Site-Anfragen gesendet
+          );
 
           console.log('Login erfolgreich! Willkommen zurück.');
           this.toastr.success('Login erfolgreich! Willkommen zurück.', 'Erfolg');

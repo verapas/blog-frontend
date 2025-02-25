@@ -1,10 +1,11 @@
 import {HttpInterceptorFn} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
+import {inject} from '@angular/core';
 
 export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
+  const cookieService = inject(CookieService);
+  const token = cookieService.get('JOURNALIX_ACCESS_TOKEN');
 
-  const token = localStorage.getItem('ACCESS_TOKEN');
-
-  // Falls ein Token existiert, klone den Request und setze den Authorization-Header
   const clonedRequest = token
     ? req.clone({
       setHeaders: {
@@ -15,4 +16,3 @@ export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(clonedRequest);
 };
-

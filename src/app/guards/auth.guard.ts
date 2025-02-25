@@ -1,20 +1,23 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
 import {jwtDecode} from 'jwt-decode';
+import {CookieService} from 'ngx-cookie-service';
 
 interface JwtPayload {
   exp: number;
   roles?: string[];
 }
+
 /**
  * @function authGuard
  * @description Überprüft, ob der Benutzer authentifiziert ist und,
- * falls in der Route erlaubte Rollen definiert sind (data.roles),
+ * falls in der Route erlaubte Rollen definiert sind (data.role),
  * ob der Benutzer mindestens eine dieser Rollen besitzt.
  */
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const token = localStorage.getItem('ACCESS_TOKEN');
+  const cookieService = inject(CookieService);
+  const token = cookieService.get('JOURNALIX_ACCESS_TOKEN'); // Token aus dem Cookie lesen
 
   if (!token) {
     console.warn('Kein Token gefunden, Umleitung zur Login-Seite.');
@@ -28,20 +31,20 @@ export const authGuard: CanActivateFn = (route, state) => {
 
     if (decoded.exp < currentTime) {
       console.warn('Token abgelaufen, Umleitung zur Login-Seite.');
-      localStorage.removeItem('ACCESS_TOKEN');
+      cookieService.delete('JOURNALIX_ACCESS_TOKEN', '/'); // Cookie löschen
       router.navigate(['/auth/login']);
       return false;
     }
 
     // Falls in der Route erlaubte Rollen definiert sind:
     if (route.data && route.data?.['role']) {
-      const allowedRoles = route.data?.['role'] as string[];
+      const allowedRoles = route.data['role'] as string[];
       const userRoles = decoded.roles || [];
       const hasRole = allowedRoles.some(role => userRoles.includes(role));
 
       if (!hasRole) {
         console.warn('Benutzer hat nicht die erforderliche Rolle.');
-        router.navigate(['/unauthorized']); // Eine Option: Zeige eine Seite "Zugriff verweigert" an
+        router.navigate(['/unauthorized']); // Seite "Zugriff verweigert"
         return false;
       }
     }
@@ -49,7 +52,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   } catch (error) {
     console.error('Fehler beim Dekodieren des Tokens:', error);
-    localStorage.removeItem('ACCESS_TOKEN');
+    cookieService.delete('JOURNALIX_ACCESS_TOKEN', '/');
     router.navigate(['/auth/login']);
     return false;
   }

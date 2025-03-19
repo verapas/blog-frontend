@@ -11,6 +11,16 @@
 
 @import 'ngx-toastr/toastr';
 
+/* Globale Schriftart für die gesamte Anwendung */
+* {
+  font-family: "Arial Nova", Arial, sans-serif;
+}
+
+/* Spezielle Schriftart nur für Logo-Elemente */
+.logo, h1.logo {
+  font-family: "Courier New", monospace !important;
+}
+
 body {
   //background-image: url('/3.webp');
   background-color: #c8c8c8;
@@ -25,3 +35,4 @@ body {
 html {
   height: 100%;
 }
+

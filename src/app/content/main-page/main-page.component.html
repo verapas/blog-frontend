@@ -1,15 +1,43 @@
-<div class="welcome-container">
-  <h1>Willkommen bei Journal!X</h1>
-  <p>Dein persönliches Arbeitsjournal. Halte deine Fortschritte fest, reflektiere über deinen Tag und bleib organisiert.</p>
-</div>
+<div class="page-container">
+  <div class="welcome-container">
+    <h1 class="logo">Willkommen bei Journal!X</h1>
+    <p class="welcome-text">Dein persönliches Arbeitsjournal. Halte deine Fortschritte fest, reflektiere über deinen Tag und bleib organisiert.</p>
+  </div>
 
-<div class="last-entry-container">
-  <h2>Dein letzter Eintrag</h2>
 
-  @if (!lastEntry) {
-    <p>Noch kein Eintrag vorhanden. Erstelle deinen ersten <a routerLink="/post">hier</a>.</p>
-  } @else {
-    <div class="froala-view-container" [innerHTML]="lastEntry"></div>
-    <button routerLink="/eintrag">Eintrag bearbeiten</button>
-  }
+
+  <div class="quick-actions">
+    <button class="action-button" routerLink="/content/post">
+      <span class="button-icon">+</span>
+      Neuer Eintrag
+    </button>
+    <button class="action-button" routerLink="/content/posts">
+      <span class="button-icon"></span>
+      Alle Einträge
+    </button>
+  </div>
+
+
+  <div class="last-entry-container">
+    <div class="last-entry-header">
+      <h2>Dein letzter Eintrag</h2>
+      <span class="entry-date">{{ entryDate }}</span>
+    </div>
+
+    @if (!lastEntry) {
+      <div class="empty-entry">
+        <div class="empty-icon">📓</div>
+        <p>Noch kein Eintrag vorhanden.</p>
+        <button class="create-first" routerLink="/content/post">Erstelle deinen ersten Eintrag</button>
+      </div>
+    } @else {
+      <div class="entry-content">
+        <div class="froala-view-container" [innerHTML]="lastEntry"></div>
+        <div class="entry-actions">
+          <button class="edit-button" routerLink="/content/post">Bearbeiten</button>
+          <button class="view-all-button" routerLink="/content/posts">Alle anzeigen</button>
+        </div>
+      </div>
+    }
+  </div>
 </div>

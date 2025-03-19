@@ -116,6 +116,10 @@
     background-color: #4b4b4b;
     color: white;
     cursor: pointer;
+    
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
 }
 
@@ -127,6 +131,13 @@
 
 .nav-link:hover .icon {
   fill: currentColor; /* Ändert die Farbe des SVG beim Hover */
+}
+
+.nav-link img {
+  width: 23px;
+  height: 23px;
+  margin-right: 8px;
+  transition: filter 0.3s ease;
 }
 
 

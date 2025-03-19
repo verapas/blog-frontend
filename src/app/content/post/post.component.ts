@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { HeaderComponent } from '../../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import {ToastrService} from 'ngx-toastr';
+import {PostEntityControllerService} from '../../openapi-client';
 
 @Component({
   selector: 'app-post',
@@ -18,6 +20,9 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
   styleUrl: './post.component.scss'
 })
 export class PostComponent {
+  private toastr = inject(ToastrService);
+  private postEntityControllerService = inject(PostEntityControllerService);
+
   public froalaOptions: object = {
     toolbarButtons: [
       'bold', 'italic', 'underline', 'strikeThrough', '|',
@@ -63,8 +68,38 @@ export class PostComponent {
   };
 
   savePost() {
+    // 1. Editor-Inhalt auslesen
     const editorContent = document.querySelector('.fr-view')?.innerHTML || '';
-    console.log('Post-Inhalt:', editorContent);
-    // this.apiService.savePost(editorContent).subscribe(...);
+
+    // 2. Minimal-Prüfung, ob Inhalt leer ist
+    if (!editorContent.trim()) {
+      this.toastr.error('Der Post-Inhalt darf nicht leer sein.', 'Fehler');
+      return;
+    }
+
+    // 3. Mit DOMParser den ersten <h2> aus dem Inhalt auslesen
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(editorContent, 'text/html');
+    const h2Element = doc.querySelector('h2');
+    // Falls kein <h2> gefunden wird, verwende einen Standardwert
+    const title = h2Element?.textContent?.trim() || 'Ohne Titel';
+
+    // 4. POST-Request an deinen OpenAPI-Service absetzen
+    this.postEntityControllerService
+      .postCollectionResourcePostPost1({
+        title: title,
+        content: editorContent
+      })
+      .subscribe({
+        next: (response) => {
+          console.log('Post gespeichert:', response);
+          this.toastr.success('Post erfolgreich gespeichert!', 'Erfolg');
+          // Optional: Editor leeren oder zu einer anderen Seite navigieren
+        },
+        error: (err) => {
+          console.error('Fehler beim Speichern des Posts:', err);
+          this.toastr.error('Fehler beim Speichern des Posts.', 'Fehler');
+        }
+      });
   }
 }

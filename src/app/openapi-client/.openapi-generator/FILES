@@ -2,6 +2,7 @@
 README.md
 api.module.ts
 api/api.ts
+api/postController.service.ts
 api/postEntityController.service.ts
 api/postPropertyReferenceController.service.ts
 api/postSearchController.service.ts

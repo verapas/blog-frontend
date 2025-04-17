@@ -8,7 +8,7 @@
 
   <div class="quick-actions">
     <button class="action-button" routerLink="/content/post">
-      <span class="button-icon">+</span>
+      <span class="button-icon"></span>
       Neuer Eintrag
     </button>
     <button class="action-button" routerLink="/content/posts">
@@ -32,7 +32,7 @@
       </div>
     } @else {
       <div class="entry-content">
-        <div class="froala-view-container" [innerHTML]="lastEntry"></div>
+        <div class="froala-view-container fr-view" [innerHTML]="lastEntry"></div>
         <div class="entry-actions">
           <button class="edit-button" routerLink="/content/post">Bearbeiten</button>
           <button class="view-all-button" routerLink="/content/posts">Alle anzeigen</button>

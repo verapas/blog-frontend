@@ -1,3 +1,5 @@
+export * from './postController.service';
+import { PostControllerService } from './postController.service';
 export * from './postEntityController.service';
 import { PostEntityControllerService } from './postEntityController.service';
 export * from './postPropertyReferenceController.service';
@@ -12,4 +14,4 @@ export * from './userEntityController.service';
 import { UserEntityControllerService } from './userEntityController.service';
 export * from './userSearchController.service';
 import { UserSearchControllerService } from './userSearchController.service';
-export const APIS = [PostEntityControllerService, PostPropertyReferenceControllerService, PostSearchControllerService, ProfileControllerService, UserControllerService, UserEntityControllerService, UserSearchControllerService];
+export const APIS = [PostControllerService, PostEntityControllerService, PostPropertyReferenceControllerService, PostSearchControllerService, ProfileControllerService, UserControllerService, UserEntityControllerService, UserSearchControllerService];

@@ -39,19 +39,19 @@ export class PostComponent {
           const today = new Date().toLocaleDateString();
           const template = `
             <h2>Arbeitsjournal vom ${today}</h2>
-            <table style="width: 100%;">
+            <table style="width: 100%; table-layout: fixed;">
               <thead>
                 <tr>
-                  <th>Tätigkeit</th>
-                  <th>Dauer</th>
-                  <th>Fortschritt/Anmerkungen</th>
+                  <th style="width: 20%;">Tätigkeit</th>
+                  <th style="width: 15%;">Dauer</th>
+                  <th style="width: 65%;">Fortschritt/Anmerkungen</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td style="vertical-align: top;"></td>
+                  <td style="vertical-align: top;"></td>
+                  <td style="vertical-align: top;"></td>
                 </tr>
               </tbody>
             </table>

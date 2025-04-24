@@ -1,2 +1,157 @@
-<p>profile works!</p>
+<div class="page-container">
+  <div class="welcome-container">
+    <h1 class="logo">Dein Profil</h1>
+    <p class="welcome-text">Verwalte deine persönlichen Daten und Kontoeinstellungen.</p>
+  </div>
 
+  <div class="quick-actions">
+    <button class="action-button" (click)="startEditing()">
+      Profil bearbeiten
+    </button>
+    <button class="action-button" (click)="startChangingPassword()">
+      Passwort ändern
+    </button>
+  </div>
+
+  <div class="profile-container">
+    @if (!isEditing && !isChangingPassword) {
+      <div class="profile-view">
+        <div class="profile-header">
+          <h2>Persönliche Daten</h2>
+        </div>
+
+        <div class="profile-content">
+          <div class="profile-info">
+            <div class="info-row">
+              <span class="label">Vorname:</span>
+              <span class="value">{{ userProfile?.firstName }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Nachname:</span>
+              <span class="value">{{ userProfile?.lastName }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">E-Mail:</span>
+              <span class="value">{{ userProfile?.email }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Rolle:</span>
+              <span class="value">{{ userProfile?.role }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <!-- Formular zum Bearbeiten der Profildaten -->
+      @if (isEditing) {
+        <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="profile-edit-form">
+          <div class="profile-header">
+            <h2>Profil bearbeiten</h2>
+          </div>
+
+          <div class="form-content">
+            <div class="form-group">
+              <label for="firstName">Vorname</label>
+              <input id="firstName" type="text" formControlName="firstName" />
+              @if (profileForm.get('firstName')?.touched && profileForm.get('firstName')?.hasError('required')) {
+                <p class="error">Vorname ist erforderlich.</p>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Nachname</label>
+              <input id="lastName" type="text" formControlName="lastName" />
+              @if (profileForm.get('lastName')?.touched && profileForm.get('lastName')?.hasError('required')) {
+                <p class="error">Nachname ist erforderlich.</p>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-Mail</label>
+              <input id="email" type="email" formControlName="email" />
+              @if (profileForm.get('email')?.touched && profileForm.get('email')?.invalid) {
+                <p class="error">
+                  @if (profileForm.get('email')?.hasError('required')) {
+                    <span>E-Mail ist erforderlich.</span>
+                  }
+                  @if (profileForm.get('email')?.hasError('email')) {
+                    <span>Ungültige E-Mail-Adresse.</span>
+                  }
+                </p>
+              }
+            </div>
+
+            <div class="entry-actions">
+              <button type="submit" [disabled]="profileForm.invalid" class="edit-button">Speichern</button>
+              <button type="button" (click)="cancelEditing()" class="view-all-button">Abbrechen</button>
+            </div>
+          </div>
+        </form>
+      }
+
+      <!-- Formular zum Ändern des Passworts -->
+      @if (isChangingPassword) {
+        <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" class="password-form">
+          <div class="profile-header">
+            <h2>Passwort ändern</h2>
+          </div>
+
+          <div class="form-content">
+            <div class="form-group">
+              <label for="currentPassword">Aktuelles Passwort</label>
+              <input id="currentPassword" type="password" formControlName="currentPassword" />
+              @if (passwordForm.get('currentPassword')?.touched && passwordForm.get('currentPassword')?.hasError('required')) {
+                <p class="error">Aktuelles Passwort ist erforderlich.</p>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="newPassword">Neues Passwort</label>
+              <input id="newPassword" type="password" formControlName="newPassword" />
+              @if (passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.invalid) {
+                <p class="error">
+                  @if (passwordForm.get('newPassword')?.hasError('required')) {
+                    <span>Neues Passwort ist erforderlich.</span>
+                  }
+                  @if (passwordForm.get('newPassword')?.hasError('minlength')) {
+                    <span>Passwort muss mindestens 6 Zeichen lang sein.</span>
+                  }
+                </p>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Neues Passwort bestätigen</label>
+              <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+              @if (passwordForm.get('confirmPassword')?.touched && passwordForm.get('confirmPassword')?.hasError('required')) {
+                <p class="error">Passwortbestätigung ist erforderlich.</p>
+              }
+            </div>
+
+            @if (passwordForm.errors?.['passwordMismatch'] &&
+            (passwordForm.get('confirmPassword')?.touched || passwordForm.get('newPassword')?.touched)) {
+              <p class="error">Passwörter stimmen nicht überein.</p>
+            }
+
+            <div class="entry-actions">
+              <button type="submit" [disabled]="passwordForm.invalid" class="edit-button">Passwort ändern</button>
+              <button type="button" (click)="cancelPasswordChange()" class="view-all-button">Abbrechen</button>
+            </div>
+
+            @if (passwordSuccess) {
+              <div class="success-message">Passwort wurde erfolgreich geändert.</div>
+            }
+          </div>
+        </form>
+      }
+    }
+  </div>
+
+  @if (errorMessage) {
+    <div class="error-message">{{ errorMessage }}</div>
+  }
+
+  @if (passwordErrorMessage) {
+    <div class="error-message">{{ passwordErrorMessage }}</div>
+  }
+</div>

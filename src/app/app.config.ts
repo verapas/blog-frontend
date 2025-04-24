@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {authorizationInterceptor} from './Interceptors/authorisation.interceptor';
+import {tokenValidationInterceptor} from './Interceptors/tokenValidation.interceptor';
 import {provideToastr} from 'ngx-toastr';
 import {ApiModule, Configuration} from './openapi-client';
 
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(
-      withInterceptors([authorizationInterceptor])
+      withInterceptors([tokenValidationInterceptor, authorizationInterceptor])
     ),
     provideToastr(),
     importProvidersFrom(

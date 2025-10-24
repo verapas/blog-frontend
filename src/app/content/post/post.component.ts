@@ -1,10 +1,10 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { HeaderComponent } from '../../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import {ToastrService} from 'ngx-toastr';
-import {PostEntityControllerService} from '../../openapi-client';
+import {PostControllerService, PostEntityControllerService} from '../../openapi-client';
 
 @Component({
   selector: 'app-post',
@@ -19,10 +19,37 @@ import {PostEntityControllerService} from '../../openapi-client';
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
   private toastr = inject(ToastrService);
   private postEntityControllerService = inject(PostEntityControllerService);
+  private PostControllerService = inject(PostControllerService);
+  private existingPostContent: string | null = null;
 
+  ngOnInit() {
+    this.checkForExistingPost();
+
+  }
+
+  private checkForExistingPost() {
+    const today = new Date().toLocaleDateString();
+    const todayTitle = `Arbeitsjournal vom ${today}`;
+
+    this.PostControllerService.getPostsByTitle(todayTitle).subscribe({
+      next: (posts) => {
+        if (posts && posts.length > 0) {
+          // Post exists, store its content
+          this.existingPostContent = posts[0].content;
+          this.toastr.info(`Arbeitsjournal vom ${today} wurde geladen.`);
+        }
+      },
+      error: (err) => {
+        console.error('Fehler beim Suchen des Posts:', err);
+      }
+    });
+  }
+
+
+  // TODO existing post zuerst reinrendern, falls bereits einer vorhanden ist von diesem Tag. Oder ganze logik nochmals überdenken :)))
   public froalaOptions: object = {
     toolbarButtons: [
       'bold', 'italic', 'underline', 'strikeThrough', '|',

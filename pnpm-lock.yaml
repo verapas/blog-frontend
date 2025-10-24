@@ -54,8 +54,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       ngx-cookie-service:
-        specifier: ^18.0.0
-        version: 18.0.0(@angular/common@19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))
+        specifier: ^20.1.0
+        version: 20.1.0(@angular/common@19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))
       ngx-toastr:
         specifier: ^19.0.0
         version: 19.1.0(@angular/common@19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@19.2.15(@angular/animations@19.2.15(@angular/common@19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1)))
@@ -3360,11 +3360,11 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  ngx-cookie-service@18.0.0:
-    resolution: {integrity: sha512-hkkUckzZTXXWtFgvVkT2hg6mwYMLXioXDZWBsVCOy9gYkADjsj0N5VViO7eo2izQ0VcMPd/Etog1trf/T4oZMQ==}
+  ngx-cookie-service@20.1.0:
+    resolution: {integrity: sha512-g7Ddq8097qujmJfoEK27H12KLEpuO4SBPhoOYQ2kmLMSvz65vRrSKVwzOxdc75cFLQPW45Jfyyg3LoMTjKW0uA==}
     peerDependencies:
-      '@angular/common': ^18.0.0-rc.0
-      '@angular/core': ^18.0.0-rc.0
+      '@angular/common': ^20.0.0
+      '@angular/core': ^20.0.0
 
   ngx-toastr@19.1.0:
     resolution: {integrity: sha512-Qa7Kg7QzGKNtp1v04hu3poPKKx8BGBD/Onkhm6CdH5F0vSMdq+BdR/f8DTpZnGFksW891tAFufpiWb9UZX+3vg==}
@@ -7935,7 +7935,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  ngx-cookie-service@18.0.0(@angular/common@19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1)):
+  ngx-cookie-service@20.1.0(@angular/common@19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1)):
     dependencies:
       '@angular/common': 19.2.15(@angular/core@19.2.15(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
       '@angular/core': 19.2.15(rxjs@7.8.2)(zone.js@0.15.1)

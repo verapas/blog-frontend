@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angul
 import {NavigationEnd, Router} from '@angular/router';
 import {HeaderComponent} from '../header/header.component';
 import {RegisterComponent} from './register/register.component';
-import { CommonModule } from '@angular/common';
+
 import {LoginComponent} from './login/login.component';
 import {filter} from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,9 +15,8 @@ import { UserControllerService } from '../openapi-client';
     HeaderComponent,
     RegisterComponent,
     LoginComponent,
-    CommonModule,
     HttpClientModule
-  ],
+],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
   encapsulation: ViewEncapsulation.None

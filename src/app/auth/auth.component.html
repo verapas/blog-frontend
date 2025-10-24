@@ -6,7 +6,11 @@
     </p>
   </div>
   <div class="login-box">
-    <app-login *ngIf="isLoginMode" (switchToRegister)="toggleMode()"></app-login>
-    <app-register *ngIf="!isLoginMode" (switchToLogin)="toggleMode()"></app-register>
+    @if (isLoginMode) {
+      <app-login (switchToRegister)="toggleMode()"></app-login>
+    }
+    @if (!isLoginMode) {
+      <app-register (switchToLogin)="toggleMode()"></app-register>
+    }
   </div>
 </div>

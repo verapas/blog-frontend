@@ -3,7 +3,7 @@ import {RouterModule} from '@angular/router';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 import {PostControllerService, PostEntityControllerService, PostShowDto} from "../../openapi-client";
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {CommonModule} from '@angular/common';
+
 
 @Component({
   selector: 'app-main-page',
@@ -11,9 +11,8 @@ import {CommonModule} from '@angular/common';
   imports: [
     RouterModule,
     FroalaEditorModule,
-    FroalaViewModule,
-    CommonModule
-  ],
+    FroalaViewModule
+],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })

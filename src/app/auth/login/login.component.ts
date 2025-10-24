@@ -1,6 +1,6 @@
 import {afterNextRender, Component, DestroyRef, EventEmitter, inject, Output, viewChild} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
-import {CommonModule} from '@angular/common';
+
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserControllerService} from '../../openapi-client';
 import {ToastrService} from 'ngx-toastr';
@@ -9,7 +9,7 @@ import {CookieService} from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
+  imports: [FormsModule, RouterModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

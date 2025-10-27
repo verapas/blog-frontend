@@ -26,6 +26,10 @@ export const contentRoutes: Routes = [
         path: 'settings',
         loadComponent: () => import('./settings/settings.component').then(c => c.SettingsComponent),
       },
+      {
+        path: 'form-signals',
+        loadComponent: () => import('./form-signals/form-signals.component').then(c => c.FormSignalsComponent),
+      },
       { path: '', redirectTo: 'main-page', pathMatch: 'full' }
     ]
   }

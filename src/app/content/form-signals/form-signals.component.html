@@ -1,0 +1,51 @@
+<mat-card class="form-signals">
+
+  <mat-card-header style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 24px; border-radius: 8px 8px 0 0;">
+    <mat-card-title style="color: white; font-size: 24px; font-weight: 600; text-align: center; margin: 0;">
+      Superhero Registration
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content style="margin-top: 30px">
+    <form class="stack">
+        <mat-form-field appearance="fill">
+          <mat-label>Alias (Superhero Name)</mat-label>
+          <input matInput id="alias" type="text" [control]="superheroRegistrationForm.alias" placeholder="Enter your superhero alias" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Real Name</mat-label>
+          <input matInput id="realName" type="text" [control]="superheroRegistrationForm.realName" placeholder="Enter your real name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Super Power</mat-label>
+          <input matInput id="superPower" type="text" [control]="superheroRegistrationForm.superPower" placeholder="Enter your superpower" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Weakness</mat-label>
+          <input matInput id="weakness" type="text" [control]="superheroRegistrationForm.weakness" placeholder="Enter your weakness" />
+        </mat-form-field>
+
+        <mat-checkbox [control]="superheroRegistrationForm.wearsCape">Wears Cape</mat-checkbox>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Arch Enemy</mat-label>
+          <input matInput id="archEnemy" type="text" [control]="superheroRegistrationForm.archEnemy" placeholder="Enter your arch enemy" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Liability Damage (in millions)</mat-label>
+          <input matInput id="liabilityDamage" type="number" [control]="superheroRegistrationForm.liabilityDamage" />
+        </mat-form-field>
+
+
+      <div class="actions">
+        <button mat-raised-button color="primary" type="button" (click)="logForm()">
+          Register Superhero (Demo)
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

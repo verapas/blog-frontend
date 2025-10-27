@@ -1,23 +1,17 @@
-<form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" class="login-form">
+<form (ngSubmit)="onSubmit()" class="login-form">
   <div class="form">
     <h2>Login</h2>
 
     <!-- E-Mail-Feld -->
-    <input id="email" type="email" formControlName="email" placeholder="Geben Sie Ihre E-Mail ein" />
-    @if (loginFormGroup.get('email')?.touched && loginFormGroup.get('email')?.invalid) {
-      <p class="control-error">
-        @if (loginFormGroup.get('email')?.hasError('required')) { E-Mail ist erforderlich. }
-        @if (loginFormGroup.get('email')?.hasError('email')) { Ungültige E-Mail-Adresse. }
-      </p>
+    <input id="email" type="email" [control]="loginForm.email" placeholder="Geben Sie Ihre E-Mail ein" />
+    @for(error of loginForm.email().errors(); track error) {
+      <p class="control-error">{{ error.message }}</p>
     }
 
     <!-- Passwort-Feld -->
-    <input id="password" type="password" formControlName="password" placeholder="Geben Sie Ihr Passwort ein" />
-    @if (loginFormGroup.get('password')?.touched && loginFormGroup.get('password')?.invalid) {
-      <p class="control-error">
-        @if (loginFormGroup.get('password')?.hasError('required')) { Passwort ist erforderlich. }
-        @if (loginFormGroup.get('password')?.hasError('minlength')) { Passwort muss mindestens 8 Zeichen lang sein. }
-      </p>
+    <input id="password" type="password" [control]="loginForm.password" placeholder="Geben Sie Ihr Passwort ein" />
+    @for(error of loginForm.password().errors(); track error) {
+      <p class="control-error">{{ error.message }}</p>
     }
 
     <!-- Fehlernachricht -->
@@ -28,7 +22,7 @@
     }
 
     <!-- Buttons -->
-    <button class="login" type="submit" [disabled]="loginFormGroup.invalid">Anmelden</button>
+    <button class="login" type="submit" [disabled]="!loginForm().valid()">Anmelden</button>
     <button class="register" type="button" (click)="router.navigate(['/auth/register'])">Registrieren</button>
   </div>
 </form>

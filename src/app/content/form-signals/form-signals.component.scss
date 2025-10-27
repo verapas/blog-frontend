@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  padding: 16px;
+}
+
+.form-signals {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+form.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}

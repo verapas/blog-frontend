@@ -59,10 +59,10 @@ export class FormSignalsComponent {
     apply(fieldPath.superPower, textSchema);
     apply(fieldPath.archEnemy, textSchema);
     apply(fieldPath.weakness, longTextSchema);
+    apply(fieldPath.capeColor, textSchema);
 
     required(fieldPath.capeColor, {
-      when: ({ valueOf }) => valueOf(fieldPath.wearsCape) === true,
-      message: 'Justification for travelling is required.'
+      when: ({ valueOf }) => valueOf(fieldPath.wearsCape) === true
     })
   });
 

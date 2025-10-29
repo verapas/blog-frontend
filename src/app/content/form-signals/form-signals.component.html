@@ -12,34 +12,41 @@
         <mat-label>Alias (Superhero Name)</mat-label>
         <input matInput id="alias" type="text" [control]="superheroRegistrationForm.alias" placeholder="Enter your superhero alias" />
       </mat-form-field>
-      @for(error of superheroRegistrationForm.alias().errors(); track error){
-        <div class="validation-error">{{ error.message }}</div>
+      @if (superheroRegistrationForm.alias().touched()) {
+        @for(error of superheroRegistrationForm.alias().errors(); track error){
+          <div class="validation-error">{{ error.message }}</div>
+        }
       }
 
       <mat-form-field appearance="fill">
         <mat-label>Real Name</mat-label>
         <input matInput id="realName" type="text" [control]="superheroRegistrationForm.realName" placeholder="Enter your real name" />
       </mat-form-field>
-      @for(error of superheroRegistrationForm.realName().errors(); track error){
-        <div class="validation-error">{{ error.message }}</div>
+      @if (superheroRegistrationForm.realName().touched()) {
+        @for(error of superheroRegistrationForm.realName().errors(); track error){
+          <div class="validation-error">{{ error.message }}</div>
+        }
       }
 
       <mat-form-field appearance="fill">
         <mat-label>Super Power</mat-label>
         <input matInput id="superPower" type="text" [control]="superheroRegistrationForm.superPower" placeholder="Enter your superpower" />
       </mat-form-field>
-      @for(error of superheroRegistrationForm.superPower().errors(); track error){
-        <div class="validation-error">{{ error.message }}</div>
+      @if (superheroRegistrationForm.superPower().touched()) {
+        @for(error of superheroRegistrationForm.superPower().errors(); track error){
+          <div class="validation-error">{{ error.message }}</div>
+        }
       }
 
       <mat-form-field appearance="fill">
         <mat-label>Weakness</mat-label>
         <input matInput id="weakness" type="text" [control]="superheroRegistrationForm.weakness" placeholder="Enter your weakness" />
       </mat-form-field>
-      @for(error of superheroRegistrationForm.weakness().errors(); track error){
-        <div class="validation-error">{{ error.message }}</div>
+      @if (superheroRegistrationForm.weakness().touched()) {
+        @for(error of superheroRegistrationForm.weakness().errors(); track error){
+          <div class="validation-error">{{ error.message }}</div>
+        }
       }
-
 
       <mat-checkbox [control]="superheroRegistrationForm.wearsCape">Wears Cape</mat-checkbox>
       @if (superheroRegistrationForm.wearsCape().value()) {
@@ -48,9 +55,11 @@
             <mat-label>Cape Color</mat-label>
             <input matInput id="weakness" type="text" [control]="superheroRegistrationForm.capeColor" placeholder="Enter your cape color" />
           </mat-form-field>
-          @for(error of superheroRegistrationForm.capeColor().errors(); track error.kind) {
-            @if(error.kind === 'required') {
-              <div class="validation-error">{{ error.message }}</div>
+          @if (superheroRegistrationForm.capeColor().touched()) {
+            @for(error of superheroRegistrationForm.capeColor().errors(); track error.kind) {
+              @if(error.kind === 'required') {
+                <div class="validation-error">{{ error.message }}</div>
+              }
             }
           }
         </div>
@@ -61,18 +70,21 @@
         <mat-label>Arch Enemy</mat-label>
         <input matInput id="archEnemy" type="text" [control]="superheroRegistrationForm.archEnemy" placeholder="Enter your arch enemy" />
       </mat-form-field>
-      @for(error of superheroRegistrationForm.archEnemy().errors(); track error){
-        <div class="validation-error">{{ error.message }}</div>
+      @if (superheroRegistrationForm.archEnemy().touched()) {
+        @for(error of superheroRegistrationForm.archEnemy().errors(); track error){
+          <div class="validation-error">{{ error.message }}</div>
+        }
       }
 
       <mat-form-field appearance="fill">
         <mat-label>Liability Damage (in millions)</mat-label>
         <input matInput id="liabilityDamage" type="number" [control]="superheroRegistrationForm.liabilityDamage" />
       </mat-form-field>
-      @for(error of superheroRegistrationForm.liabilityDamage().errors(); track error){
-        <div class="validation-error">{{ error.message }}</div>
+      @if (superheroRegistrationForm.liabilityDamage().touched()) {
+        @for(error of superheroRegistrationForm.liabilityDamage().errors(); track error){
+          <div class="validation-error">{{ error.message }}</div>
+        }
       }
-
 
       <div class="actions">
         <button

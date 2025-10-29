@@ -7,6 +7,16 @@
   </mat-card-header>
 
   <mat-card-content style="margin-top: 30px">
+
+    @if (superheroRegistrationForm().errors().length > 0) {
+      <mat-card style="background: #ffebee; padding: 16px; margin-bottom: 16px;">
+        <h3 style="color: #c62828; margin-top: 0;">Error while saving:</h3>
+        @for(error of superheroRegistrationForm().errors(); track error.kind) {
+          <p style="color: #c62828; margin: 0;">{{ error.message }}</p>
+        }
+      </mat-card>
+    }
+
     <form class="stack" (submit)="onSubmit(); $event.preventDefault();">
       <mat-form-field appearance="fill">
         <mat-label>Alias (Superhero Name)</mat-label>
@@ -87,13 +97,7 @@
       }
 
       <div class="actions">
-        <button
-          mat-raised-button
-          color="primary"
-          type="button"
-          [disabled]="!superheroRegistrationForm().valid() || superheroRegistrationForm().submitting()"
-          (click)="onSubmit()">
-
+        <button class="button-style" type="submit" [disabled]="superheroRegistrationForm().submitting()" >
           @if (superheroRegistrationForm().submitting()) {
             Registering...
           } @else {

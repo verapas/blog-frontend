@@ -1,16 +1,9 @@
 import {Component, signal} from '@angular/core';
 import {
-  apply,
+  apply, applyWhen,
   Control,
   form,
-  maxLength,
-  min,
-  minLength,
-  required,
-  schema,
-  Schema,
   submit,
-  validate
 } from '@angular/forms/signals';
 import { SuperheroRegistrationInterface } from './form-signal-interface/SuperheroRegistrationInterface';
 import { MatCardModule } from '@angular/material/card';
@@ -19,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import {$locationShim} from '@angular/common/upgrade';
 import {longTextSchema, textSchema} from './schemas/superhero-schemas';
 
 @Component({
@@ -59,31 +51,41 @@ export class FormSignalsComponent {
     apply(fieldPath.superPower, textSchema);
     apply(fieldPath.archEnemy, textSchema);
     apply(fieldPath.weakness, longTextSchema);
-    apply(fieldPath.capeColor, textSchema);
 
-    required(fieldPath.capeColor, {
-      when: ({ valueOf }) => valueOf(fieldPath.wearsCape) === true
-    })
+
+    applyWhen(
+      fieldPath.capeColor, (ctx) => ctx.valueOf(fieldPath.wearsCape), textSchema
+    );
   });
 
 
-
-  // Neue submit() Funktion mit async Support
   async onSubmit(): Promise<void> {
-    await submit(this.superheroRegistrationForm, async (value) => {
-      console.log('📝 Submitting superhero registration:', value);
+    await submit(this.superheroRegistrationForm, async (form) => {
+      try {
+        console.log('📝 Submitting superhero registration:', form().value());
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
-      console.log('✅ Registration complete!');
-      alert('🦸‍♂️ Superhero erfolgreich registriert!');
+        const randomError = Math.random() > 0.5;
+        if (randomError) {
+          throw new Error('Server Error, try again');
+        }
+
+        console.log('Registration complete!');
+        form().reset();
+
+        return undefined;
+      } catch (e) {
+        console.error('Registration failed:', e);
+
+        return [
+          {
+            kind: 'server',
+            message: (e as Error).message || 'An error occurred'
+          }
+        ];
+      }
     });
   }
 
-  // Alte Methode zum Vergleich (optional für deinen Vortrag)
-  logForm(): void {
-    console.log('FormSignals value:', this.superheroRegistration());
-    console.log('Form valid:', this.superheroRegistrationForm().valid());
-  }
 }

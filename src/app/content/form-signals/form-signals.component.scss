@@ -1,25 +1,40 @@
 :host {
   display: block;
   padding: 16px;
-}
 
-.form-signals {
-  max-width: 720px;
-  margin: 0 auto;
-}
 
-form.stack {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+  .form-signals {
+    max-width: 720px;
+    margin: 0 auto;
+  }
 
-mat-form-field {
-  width: 100%;
-}
+  form.stack {
+    display: flex;
+    flex-direction: column;
+  }
 
-.actions {
-  margin-top: 8px;
-  display: flex;
-  justify-content: flex-end;
+  mat-form-field {
+    padding-top: 16px;
+    width: 100%;
+  }
+
+  .actions {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .additional-form {
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 16px;
+    margin-left: 30px;
+    padding-top: 0;
+  }
+
+  .validation-error {
+    color: red;
+    font-size: small;
+  }
+
 }

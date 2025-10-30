@@ -1,11 +1,11 @@
-export const VEHICLE_TYPES = ['jet', 'horse', 'bicycle', 'tricycle', 'rickshaw-demon', 'wheelchair', 'a lame car', 'a super car'];
+export const VEHICLE_TYPES = ['jet', 'horse', 'bicycle', 'tricycle', 'rickshaw-demon', 'wheelchair', 'a lame car', 'a super car'] as const;
 
-export type VehicleType = typeof VEHICLE_TYPES;
+export type VehicleType = (typeof VEHICLE_TYPES)[number];
 
 export interface SuperheroRegistrationInterface {
   alias: string;
   realName: string;
-  superPower: string;
+  powers: string[];
   weakness: string;
   wearsCape: boolean;
   capeColor: string;

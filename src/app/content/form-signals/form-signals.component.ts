@@ -1,8 +1,10 @@
 import {Component, signal} from '@angular/core';
 import {
-  apply, applyWhen,
-  Control, disabled,
-  form,
+  apply, applyEach,
+  applyWhen,
+  Control,
+  disabled,
+  form, maxLength, minLength, required, schema,
   submit,
 } from '@angular/forms/signals';
 import { SuperheroRegistrationInterface, VEHICLE_TYPES } from './form-signal-interface/SuperheroRegistrationInterface';
@@ -12,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import {longTextSchema, textSchema, vehicleSchema} from './schemas/superhero-schemas';
 
 @Component({
@@ -25,7 +28,8 @@ import {longTextSchema, textSchema, vehicleSchema} from './schemas/superhero-sch
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   styleUrl: './form-signals.component.scss'
 })
@@ -36,7 +40,7 @@ export class FormSignalsComponent {
   protected readonly superheroRegistration = signal<SuperheroRegistrationInterface>({
     alias: '',
     realName: '',
-    superPower: '',
+    powers: ['Laser-Eyes','Ungodly Demon-Powers'],
     weakness: '',
     wearsCape: false,
     capeColor: '',
@@ -45,7 +49,7 @@ export class FormSignalsComponent {
     registrationDate: new Date(),
     hasVehicle: false,
     vehicle: {
-      type: ['bicycle'],
+      type: 'bicycle',
       speed: 0
     }
   });
@@ -55,10 +59,9 @@ export class FormSignalsComponent {
   protected readonly superheroRegistrationForm = form(this.superheroRegistration, (fieldPath) => {
     apply(fieldPath.alias, textSchema);
     apply(fieldPath.realName, textSchema);
-    apply(fieldPath.superPower, textSchema);
     apply(fieldPath.archEnemy, textSchema);
     apply(fieldPath.weakness, longTextSchema);
-
+    applyEach(fieldPath.powers, textSchema);
 
     applyWhen(
       fieldPath.capeColor,
@@ -72,6 +75,7 @@ export class FormSignalsComponent {
       (ctx) => ctx.valueOf(fieldPath.hasVehicle),
       vehicleSchema
     );
+
     disabled(fieldPath.vehicle.type, (ctx) => !ctx.valueOf(fieldPath.hasVehicle));
     disabled(fieldPath.vehicle.speed, (ctx) => !ctx.valueOf(fieldPath.hasVehicle));
   });
@@ -79,31 +83,30 @@ export class FormSignalsComponent {
 
   async onSubmit(): Promise<void> {
     await submit(this.superheroRegistrationForm, async (form) => {
-      try {
-        console.log('📝 Submitting superhero registration:', form().value());
+      console.log('📝 Submitting:', form().value());
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-        const randomError = Math.random() > 0.5;
-        if (randomError) {
-          throw new Error('Server Error, try again');
-        }
-
-        console.log('Registration complete!');
-        form().reset();
-
-        return undefined;
-      } catch (e) {
-        console.error('Registration failed:', e);
-
-        return [
-          {
-            kind: 'server',
-            message: (e as Error).message || 'An error occurred'
-          }
-        ];
-      }
+      console.log('✅ Success!');
+      form().reset();
+      return undefined;
     });
+  }
+
+
+  addPower(): void {
+    this.superheroRegistration.update(data => ({
+      ...data,
+      powers: [...data.powers, '']
+    }));
+  }
+
+  removePower(index: number): void {
+    this.superheroRegistration.update(data => ({
+      ...data,
+      powers: data.powers.filter((_, i) => i !== index)
+    }));
   }
 
 }

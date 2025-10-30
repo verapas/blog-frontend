@@ -14,11 +14,10 @@
         <mat-label>Alias (Superhero Name)</mat-label>
         <input matInput id="alias" type="text" [control]="superheroRegistrationForm.alias" placeholder="Enter your superhero alias" />
       </mat-form-field>
-      @if (superheroRegistrationForm.alias().touched()) {
         @for(error of superheroRegistrationForm.alias().errors(); track error){
           <div class="validation-error">{{ error.message }}</div>
         }
-      }
+
 
       <mat-form-field appearance="fill">
         <mat-label>Real Name</mat-label>
@@ -30,15 +29,33 @@
         }
       }
 
-      <mat-form-field appearance="fill">
-        <mat-label>Super Power</mat-label>
-        <input matInput id="superPower" type="text" [control]="superheroRegistrationForm.superPower" placeholder="Enter your superpower" />
-      </mat-form-field>
-      @if (superheroRegistrationForm.superPower().touched()) {
-        @for(error of superheroRegistrationForm.superPower().errors(); track error){
-          <div class="validation-error">{{ error.message }}</div>
-        }
-      }
+      <div style="margin: 16px 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <label style="font-weight: 500; font-size: 16px;">Super Powers</label>
+          <button mat-raised-button color="primary" type="button" (click)="addPower()" style="height: 36px;">
+            Add Power
+          </button>
+        </div>
+        <div class="additional-form">
+          @for (power of superheroRegistrationForm.powers; track $index) {
+            <div style="display: flex; gap: 8px; align-items: start; margin-bottom: 8px;">
+              <mat-form-field appearance="fill" style="flex: 1;">
+                <mat-label>Power {{ $index + 1 }}</mat-label>
+                <input matInput [control]="power" placeholder="Enter a superpower" />
+              </mat-form-field>
+              <button mat-icon-button color="warn" type="button" (click)="removePower($index)" style="margin-top: 30px; font-size: small">
+                ❌
+              </button>
+            </div>
+            @if (power().touched()) {
+              @for(error of power().errors(); track error){
+                <div class="validation-error" style="margin-top: -8px; margin-bottom: 8px;">{{ error.message }}</div>
+              }
+            }
+          }
+        </div>
+      </div>
+
 
       <mat-form-field appearance="fill">
         <mat-label>Weakness</mat-label>
@@ -128,14 +145,6 @@
         </button>
       </div>
 
-      @if (superheroRegistrationForm().errors().length > 0) {
-        <mat-card style="background: #ffebee; padding: 16px; margin: 16px; border-radius: 10px ">
-          <h3 style="color: #c62828; margin-top: 0;">Error while saving:</h3>
-          @for(error of superheroRegistrationForm().errors(); track error.kind) {
-            <p style="color: #c62828; margin: 0;">{{ error.message }}</p>
-          }
-        </mat-card>
-      }
 
     </form>
   </mat-card-content>

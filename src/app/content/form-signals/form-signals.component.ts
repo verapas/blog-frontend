@@ -1,18 +1,18 @@
 import {Component, signal} from '@angular/core';
 import {
   apply, applyWhen,
-  Control,
+  Control, disabled,
   form,
   submit,
 } from '@angular/forms/signals';
-import { SuperheroRegistrationInterface } from './form-signal-interface/SuperheroRegistrationInterface';
+import { SuperheroRegistrationInterface, VEHICLE_TYPES } from './form-signal-interface/SuperheroRegistrationInterface';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import {longTextSchema, textSchema} from './schemas/superhero-schemas';
+import {longTextSchema, textSchema, vehicleSchema} from './schemas/superhero-schemas';
 
 @Component({
   selector: 'app-form-signals',
@@ -31,6 +31,8 @@ import {longTextSchema, textSchema} from './schemas/superhero-schemas';
 })
 export class FormSignalsComponent {
 
+  protected readonly vehicleTypes = VEHICLE_TYPES;
+
   protected readonly superheroRegistration = signal<SuperheroRegistrationInterface>({
     alias: '',
     realName: '',
@@ -40,7 +42,12 @@ export class FormSignalsComponent {
     capeColor: '',
     archEnemy: '',
     liabilityDamage: 1,
-    registrationDate: new Date()
+    registrationDate: new Date(),
+    hasVehicle: false,
+    vehicle: {
+      type: ['bicycle'],
+      speed: 0
+    }
   });
 
 
@@ -54,8 +61,19 @@ export class FormSignalsComponent {
 
 
     applyWhen(
-      fieldPath.capeColor, (ctx) => ctx.valueOf(fieldPath.wearsCape), textSchema
+      fieldPath.capeColor,
+      (ctx) => ctx.valueOf(fieldPath.wearsCape), textSchema
     );
+    disabled(fieldPath.capeColor, (ctx) => !ctx.valueOf(fieldPath.wearsCape));
+
+
+    applyWhen(
+      fieldPath.vehicle,
+      (ctx) => ctx.valueOf(fieldPath.hasVehicle),
+      vehicleSchema
+    );
+    disabled(fieldPath.vehicle.type, (ctx) => !ctx.valueOf(fieldPath.hasVehicle));
+    disabled(fieldPath.vehicle.speed, (ctx) => !ctx.valueOf(fieldPath.hasVehicle));
   });
 
 

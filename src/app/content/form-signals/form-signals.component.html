@@ -8,14 +8,6 @@
 
   <mat-card-content style="margin-top: 30px">
 
-    @if (superheroRegistrationForm().errors().length > 0) {
-      <mat-card style="background: #ffebee; padding: 16px; margin-bottom: 16px;">
-        <h3 style="color: #c62828; margin-top: 0;">Error while saving:</h3>
-        @for(error of superheroRegistrationForm().errors(); track error.kind) {
-          <p style="color: #c62828; margin: 0;">{{ error.message }}</p>
-        }
-      </mat-card>
-    }
 
     <form class="stack" (submit)="onSubmit(); $event.preventDefault();">
       <mat-form-field appearance="fill">
@@ -59,7 +51,6 @@
       }
 
       <mat-checkbox [control]="superheroRegistrationForm.wearsCape">Wears Cape</mat-checkbox>
-      @if (superheroRegistrationForm.wearsCape().value()) {
         <div class="additional-form">
           <mat-form-field appearance="fill">
             <mat-label>Cape Color</mat-label>
@@ -73,8 +64,6 @@
             }
           }
         </div>
-
-      }
 
       <mat-form-field appearance="fill">
         <mat-label>Arch Enemy</mat-label>
@@ -96,6 +85,39 @@
         }
       }
 
+      <mat-checkbox [control]="superheroRegistrationForm.hasVehicle">Has Vehicle</mat-checkbox>
+      @if (superheroRegistrationForm.hasVehicle().value()) {
+        <div class="additional-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Vehicle Type</mat-label>
+            <mat-select [control]="superheroRegistrationForm.vehicle.type">
+              @for (vehicleType of vehicleTypes; track vehicleType) {
+                <mat-option style="background: white" [value]="vehicleType">{{ vehicleType }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (superheroRegistrationForm.vehicle.type().touched()) {
+            @for(error of superheroRegistrationForm.vehicle.type().errors(); track error.kind) {
+              @if(error.kind === 'required') {
+                <div class="validation-error">{{ error.message }}</div>
+              }
+            }
+          }
+
+          <mat-form-field appearance="fill">
+            <mat-label>Speed (km/h)</mat-label>
+            <input matInput id="vehicleSpeed" type="number" [control]="superheroRegistrationForm.vehicle.speed" placeholder="Enter vehicle speed" />
+          </mat-form-field>
+          @if (superheroRegistrationForm.vehicle.speed().touched()) {
+            @for(error of superheroRegistrationForm.vehicle.speed().errors(); track error.kind) {
+              @if(error.kind === 'required') {
+                <div class="validation-error">{{ error.message }}</div>
+              }
+            }
+          }
+        </div>
+      }
+
       <div class="actions">
         <button class="button-style" type="submit" [disabled]="superheroRegistrationForm().submitting()" >
           @if (superheroRegistrationForm().submitting()) {
@@ -105,6 +127,16 @@
           }
         </button>
       </div>
+
+      @if (superheroRegistrationForm().errors().length > 0) {
+        <mat-card style="background: #ffebee; padding: 16px; margin: 16px; border-radius: 10px ">
+          <h3 style="color: #c62828; margin-top: 0;">Error while saving:</h3>
+          @for(error of superheroRegistrationForm().errors(); track error.kind) {
+            <p style="color: #c62828; margin: 0;">{{ error.message }}</p>
+          }
+        </mat-card>
+      }
+
     </form>
   </mat-card-content>
 </mat-card>
